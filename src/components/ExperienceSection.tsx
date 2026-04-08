@@ -3,18 +3,18 @@ import { Brain, Briefcase, Building2, Vote, CheckCircle2 } from "lucide-react";
 
 const experiences = [
   {
-    period: "2026 – in corso",
+    period: "2026",
     role: "Data Annotator",
-    company: "Outlier (Progetto Aether)",
+    company: "Outlier",
     description:
-      "Qui ho scoperto il mondo dell'AI da dietro le quinte: rivedo dati, valuto risposte generate e aiuto i modelli a diventare più intelligenti. È un lavoro che mi fa pensare tantissimo — e mi ha insegnato a essere critica in modo costruttivo.",
+      "Qui ho scoperto il mondo dell'AI da dietro le quinte: rivedevo dati, valutavo risposte generate e aiutavo i modelli a diventare più intelligenti. È stata un'esperienza che mi ha fatto pensare tantissimo — e mi ha insegnato a essere critica in modo costruttivo.",
     highlights: [
-      "Lavoro con testi, codice e ragionamento logico",
-      "Valuto le risposte AI con criteri che cambiano spesso (il bello è adattarsi)",
-      "Ho sviluppato un occhio critico che uso anche nel mio codice",
+      "Ho lavorato con testi, codice e ragionamento logico",
+      "Valutavo le risposte AI con criteri che cambiavano spesso (il bello era adattarsi)",
+      "Ho sviluppato un occhio critico che uso ancora oggi nel mio codice",
     ],
     icon: Brain,
-    current: true,
+    current: false,
   },
   {
     period: "Nov 2025 – in corso",

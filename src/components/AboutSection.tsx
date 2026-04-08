@@ -1,46 +1,5 @@
-import { motion, useInView } from "framer-motion";
-import { Heart, Target, Zap, GraduationCap, Code, Palette, Music, BookOpen, Coffee, Sparkles } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
-
-const values = [
-  {
-    icon: Target,
-    title: "Autodidatta convinta",
-    desc: "Quasi tutto quello che so l'ho imparato da sola, a forza di tutorial, documentazione e tanta ostinazione.",
-  },
-  {
-    icon: Zap,
-    title: "Mai ferma",
-    desc: "Se non sto imparando qualcosa di nuovo, probabilmente sto dormendo. O forse neanche quello.",
-  },
-  {
-    icon: Heart,
-    title: "Maniaca dei dettagli",
-    desc: "Allineo pixel, sistemo spaziature, riscrivo codice tre volte. Lo so, è un problema. Ma anche un superpotere.",
-  },
-];
-
-const Counter = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (!isInView) return;
-    let start = 0;
-    const duration = 2000;
-    const step = (timestamp: number) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [isInView, target]);
-
-  return <span ref={ref}>{count}{suffix}</span>;
-};
+import { motion } from "framer-motion";
+import { GraduationCap, Sparkles, Code, Palette, Music, BookOpen, Coffee, Heart } from "lucide-react";
 
 const AboutSection = () => {
   return (
@@ -62,66 +21,74 @@ const AboutSection = () => {
           </h2>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="max-w-3xl mb-16"
-        >
-          <p className="text-muted-foreground font-body leading-relaxed text-lg">
-            Mi chiamo Giada, ho vent'anni e vengo da Napoli. Mi sono diplomata al Liceo Elsa Morante
-            con indirizzo economico-sociale e un voto di{" "}
-            <span className="text-primary font-semibold">100/100</span> (sì, ne vado fiera).
-            Il web è diventato la mia passione quasi per caso: ho iniziato a smanettare con HTML per curiosità,
-            e da lì non mi sono più fermata. Oggi studio Web Design, lavoro come Data Annotator per l'AI,
-            e nel tempo libero costruisco cose con React e TypeScript — tipo questo sito.
-          </p>
-        </motion.div>
+        {/* Two-column: text + decorative side */}
+        <div className="grid md:grid-cols-5 gap-12 mb-16 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="md:col-span-3 space-y-6"
+          >
+            <p className="text-muted-foreground font-body leading-relaxed text-lg">
+              Mi chiamo Giada, ho vent'anni e vengo da Napoli. Mi sono diplomata al Liceo Elsa Morante
+              con indirizzo economico-sociale e un voto di{" "}
+              <span className="text-primary font-semibold">100/100</span> (sì, ne vado fiera).
+              Il web è diventato la mia passione quasi per caso: ho iniziato a smanettare con HTML per curiosità,
+              e da lì non mi sono più fermata. Oggi studio Web Design, lavoro come Data Annotator per l'AI,
+              e nel tempo libero costruisco cose con React e TypeScript — tipo questo sito.
+            </p>
+            <p className="text-muted-foreground font-body leading-relaxed text-lg">
+              Quasi tutto quello che so l'ho imparato da sola — a forza di tutorial, documentazione
+              e tanta ostinazione. Se non sto imparando qualcosa di nuovo, probabilmente sto dormendo.
+              O forse neanche quello.
+            </p>
+            <p className="text-muted-foreground font-body leading-relaxed text-lg">
+              Sono quella che allinea pixel, sistema spaziature e riscrive codice tre volte.
+              Lo so, è un problema. Ma anche un superpotere.
+            </p>
+            <p className="text-muted-foreground font-body leading-relaxed text-lg">
+              Ah, e funziono a caffè. Tanto caffè. ☕
+            </p>
+          </motion.div>
 
-        {/* Fun facts */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          {[
-            { value: "🎓", suffix: "", label: "Diploma 100/100" },
-            { value: "💻", suffix: "", label: "Autodidatta dal 2023" },
-            { value: "☕", suffix: "", label: "Alimentata a caffè" },
-            { value: "🚀", suffix: "", label: "Sempre un progetto in corso" },
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="text-center p-6 bg-card rounded-2xl border border-border group hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500"
-            >
-              <p className="text-3xl mb-2">
-                {stat.value}
-              </p>
-              <p className="text-sm font-body text-muted-foreground">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Values cards */}
-        <div className="grid sm:grid-cols-3 gap-5 mb-16">
-          {values.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="p-6 bg-card rounded-2xl border border-border group cursor-default hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-[border-color,box-shadow] duration-500"
-            >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:shadow-lg group-hover:shadow-primary/10 transition-all duration-300">
-                <item.icon className="w-5 h-5 text-primary" />
+          {/* Decorative side */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="md:col-span-2 hidden md:flex flex-col items-center justify-center gap-5"
+          >
+            <div className="relative w-full aspect-square max-w-[280px]">
+              {/* Decorative blobs */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 via-secondary/40 to-primary/5 rotate-3" />
+              <div className="absolute inset-2 rounded-3xl bg-card border border-border p-6 -rotate-1 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-body text-muted-foreground">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    about.tsx
+                  </div>
+                  <div className="font-mono text-xs text-muted-foreground/70 space-y-1.5">
+                    <p><span className="text-primary/70">const</span> giada = {"{"}</p>
+                    <p className="pl-4">città: <span className="text-primary">"Napoli → Torino"</span>,</p>
+                    <p className="pl-4">carburante: <span className="text-primary">"☕☕☕"</span>,</p>
+                    <p className="pl-4">mood: <span className="text-primary">"sempre curiosa"</span>,</p>
+                    <p className="pl-4">bug: <span className="text-primary">"pochi (spero)"</span>,</p>
+                    <p>{"}"}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1.5 mt-4">
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-2 h-2 rounded-full bg-primary/40"
+                  />
+                  <span className="text-[10px] font-body text-muted-foreground/60">sempre in fase di refactor</span>
+                </div>
               </div>
-              <h3 className="font-display font-semibold text-lg text-foreground mb-2">{item.title}</h3>
-              <p className="text-sm font-body text-muted-foreground leading-relaxed">{item.desc}</p>
-            </motion.div>
-          ))}
+            </div>
+          </motion.div>
         </div>
 
         {/* Interests & Passions */}
@@ -201,7 +168,7 @@ const AboutSection = () => {
               <div className="pl-4 border-l-2 border-primary/30">
                 <p className="font-display font-semibold text-foreground">Corso Web Design</p>
                 <p className="text-sm text-muted-foreground">Agenzia Formativa Dante Alighieri S.R.L.</p>
-                <p className="text-sm text-primary">2024 – in corso</p>
+                <p className="text-sm text-primary">2024 – 2026</p>
               </div>
             </div>
           </motion.div>

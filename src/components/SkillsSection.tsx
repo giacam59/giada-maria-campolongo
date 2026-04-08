@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Code2, PenTool, Wrench, TrendingUp } from "lucide-react";
+import { Code2, PenTool, Wrench } from "lucide-react";
 
 type SkillCategory = {
   title: string;
@@ -12,10 +12,10 @@ type SkillCategory = {
 const skillCategories: SkillCategory[] = [
   {
     title: "Sviluppo Web",
-    description: "Il mio pane quotidiano. Ho iniziato con HTML e CSS, poi è arrivato JavaScript e non sono più tornata indietro.",
+    description: "Il mio pane quotidiano. Ho iniziato con HTML e CSS, poi è arrivato JavaScript e non sono più tornata indietro. Da poco sto esplorando anche Python per scripting e automatizzazioni.",
     icon: Code2,
     color: "bg-primary/10 text-primary border-primary/20",
-    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React.js", "Vite", "Tailwind CSS"],
+    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React.js", "Python", "Vite", "Tailwind CSS"],
   },
   {
     title: "Design & Multimedia",
@@ -31,14 +31,6 @@ const skillCategories: SkillCategory[] = [
     color: "bg-amber-600/10 text-amber-700 border-amber-600/20",
     skills: ["Microsoft Office", "Excel avanzato", "CRM", "Git", "Navigazione web"],
   },
-];
-
-const learningItems = [
-  "Next.js",
-  "Node.js",
-  "Framer Motion",
-  "Figma",
-  "Testing (Vitest)",
 ];
 
 const SkillsSection = () => {
@@ -102,38 +94,7 @@ const SkillsSection = () => {
           ))}
         </div>
 
-        {/* Currently Learning */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-10 p-6 bg-card rounded-2xl border border-border border-dashed"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-              <TrendingUp className="w-5 h-5 text-emerald-600" />
-            </div>
-            <div>
-              <h3 className="font-display font-semibold text-foreground">Sto studiando...</h3>
-              <p className="text-xs font-body text-muted-foreground">La lista delle cose che mi incuriosiscono (e su cui sto investendo tempo)</p>
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {learningItems.map((item, i) => (
-              <motion.span
-                key={item}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: i * 0.06 }}
-                className="px-3.5 py-2 rounded-full text-sm font-body border border-dashed border-emerald-500/30 bg-emerald-500/5 text-emerald-700 cursor-default"
-              >
-                {item}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
+
       </div>
     </section>
   );
