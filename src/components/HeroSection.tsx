@@ -1,83 +1,180 @@
-import { motion } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { ArrowDown, Download } from "lucide-react";
 import profileImg from "@/assets/profile.jpg";
+import { useState, useEffect } from "react";
+
+const roles = [
+  "curiosa per natura",
+  "innamorata del web",
+  "sempre in evoluzione",
+  "a caccia di ispirazione",
+];
 
 const HeroSection = () => {
-  return (
-    <section className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden bg-section-light">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-[60%] h-[70%] bg-primary/5 rounded-bl-[120px] -z-10" />
-      <div className="absolute bottom-10 left-10 w-32 h-32 border border-primary/20 rounded-full -z-10" />
-      <div className="absolute top-1/4 right-1/4 w-2 h-2 bg-primary/30 rounded-full -z-10" />
-      <div className="absolute bottom-1/3 left-1/3 w-3 h-3 bg-primary/20 rounded-full -z-10" />
-      <div className="absolute top-20 left-[15%] w-48 h-48 bg-primary/[0.03] rounded-full blur-2xl -z-10" />
-      <div className="absolute bottom-20 right-[10%] w-64 h-64 bg-primary/[0.04] rounded-full blur-3xl -z-10" />
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
-      <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useTransform(mouseY, [-300, 300], [5, -5]);
+  const rotateY = useTransform(mouseX, [-300, 300], [-5, 5]);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    const timeout = setTimeout(
+      () => {
+        if (!isDeleting) {
+          setText(currentRole.slice(0, text.length + 1));
+          if (text.length === currentRole.length) {
+            setTimeout(() => setIsDeleting(true), 2000);
+          }
+        } else {
+          setText(currentRole.slice(0, text.length - 1));
+          if (text.length === 0) {
+            setIsDeleting(false);
+            setRoleIndex((prev) => (prev + 1) % roles.length);
+          }
+        }
+      },
+      isDeleting ? 40 : 80
+    );
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, roleIndex]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left - rect.width / 2);
+    mouseY.set(e.clientY - rect.top - rect.height / 2);
+  };
+
+  return (
+    <section className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden mesh-gradient">
+      {/* Animated particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(8)].map((_, i) => (
+          <div key={i} className="particle" />
+        ))}
+      </div>
+
+      {/* Soft ambient blurs */}
+      <div className="absolute top-1/4 left-[10%] w-[500px] h-[500px] bg-primary/[0.05] rounded-full blur-[120px] animate-pulse-glow" />
+      <div className="absolute bottom-1/4 right-[5%] w-[400px] h-[400px] bg-secondary/40 rounded-full blur-[100px] animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
+
+      {/* Decorative shape */}
+      <div className="absolute top-0 right-0 w-[55%] h-[65%] bg-primary/[0.04] rounded-bl-[120px] -z-0" />
+
+      <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
         {/* Text */}
         <motion.div
-          initial={{ opacity: 0, x: -40 }}
+          initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 rounded-full mb-6"
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 glass glow-border"
           >
-            <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span className="text-xs font-body font-medium text-primary tracking-wide uppercase">
-              Disponibile per nuovi progetti
+            <span className="text-xs font-body font-medium text-foreground/80 tracking-wide">
+              Ciao, benvenuto nel mio angolo di internet ✋
             </span>
           </motion.div>
 
-          <h1 className="text-5xl md:text-7xl font-display font-bold leading-[1.1] mb-6 text-foreground">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.05] mb-4 text-foreground">
             Giada Maria
-            <br />
-            <span className="text-primary italic">Campolongo</span>
           </h1>
-          <p className="text-lg md:text-xl font-body text-muted-foreground max-w-md leading-relaxed mb-8">
-            Aspirante Frontend Developer & Web Designer con passione per design minimal ed eleganti
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.05] mb-6 text-primary italic">
+            Campolongo
+          </h1>
+
+          <div className="h-8 mb-8">
+            <span className="text-lg md:text-xl font-body text-muted-foreground">
+              {text}
+            </span>
+            <motion.span
+              animate={{ opacity: [1, 0] }}
+              transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+              className="inline-block w-[2px] h-5 bg-primary ml-0.5 align-middle"
+            />
+          </div>
+
+          <p className="text-base md:text-lg font-body text-muted-foreground max-w-lg leading-relaxed mb-10">
+            Ho vent'anni, vivo tra codice e creatività, e qui racconto il mio percorso — tra progetti, esperimenti e tutto quello che imparo strada facendo.
           </p>
-          <div className="flex flex-wrap gap-4 mb-10">
-            <a
-              href="#contatti"
-              className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground font-body font-medium rounded-lg hover:opacity-90 transition-opacity"
+
+          <div className="flex flex-wrap gap-4">
+            <motion.a
+              href="#chi-sono"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-semibold rounded-xl hover:shadow-lg hover:shadow-primary/25 transition-shadow"
             >
-              Contattami
-            </a>
-            <a
+              Scopri la mia storia
+            </motion.a>
+            <motion.a
               href="/cv.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 border border-border text-foreground font-body font-medium rounded-lg hover:bg-card transition-colors"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-7 py-3.5 border border-border font-display font-semibold rounded-xl text-foreground hover:bg-card transition-colors"
             >
+              <Download className="w-4 h-4" />
               Scarica CV
-            </a>
+            </motion.a>
           </div>
-
         </motion.div>
 
-        {/* Image */}
+        {/* Image with 3D effect */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="flex justify-center"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => { mouseX.set(0); mouseY.set(0); }}
         >
-          <div className="relative">
-            <div className="w-72 h-72 md:w-96 md:h-96 rounded-[2rem] overflow-hidden border-2 border-border shadow-lg">
+          <motion.div
+            className="relative card-3d"
+            style={{ rotateX, rotateY }}
+          >
+            {/* Soft shadow behind image */}
+            <div className="absolute -inset-3 rounded-[2.5rem] bg-primary/10 blur-2xl opacity-50 animate-pulse-glow" />
+
+            <div className="relative w-72 h-72 md:w-[22rem] md:h-[22rem] rounded-[2rem] overflow-hidden border-2 border-border shadow-xl">
               <img
                 src={profileImg}
                 alt="Giada Maria Campolongo"
                 className="w-full h-full object-cover"
               />
-            </div>
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-2xl -z-10" />
-            <div className="absolute -top-4 -left-4 w-16 h-16 border-2 border-primary/30 rounded-xl -z-10" />
 
-          </div>
+            </div>
+
+            {/* Floating badges */}
+            <motion.div
+              animate={{ y: [-5, 5, -5] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-4 -right-4 px-4 py-2 bg-card rounded-xl border border-border shadow-md"
+            >
+              <span className="text-sm font-display font-semibold text-primary">React</span>
+            </motion.div>
+            <motion.div
+              animate={{ y: [5, -5, 5] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-3 -left-3 px-4 py-2 bg-card rounded-xl border border-border shadow-md"
+            >
+              <span className="text-sm font-display font-semibold text-primary">TypeScript</span>
+            </motion.div>
+            <motion.div
+              animate={{ y: [-3, 7, -3] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/2 -right-6 px-4 py-2 bg-card rounded-xl border border-border shadow-md"
+            >
+              <span className="text-sm font-display font-semibold text-primary">Tailwind</span>
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -86,14 +183,17 @@ const HeroSection = () => {
         href="#chi-sono"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        transition={{ delay: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 group"
       >
+        <span className="text-xs font-body text-muted-foreground tracking-widest uppercase group-hover:text-primary transition-colors">
+          Scroll
+        </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
-          <ArrowDown className="w-5 h-5 text-muted-foreground" />
+          <ArrowDown className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
         </motion.div>
       </motion.a>
     </section>

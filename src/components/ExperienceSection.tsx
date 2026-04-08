@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Brain, Briefcase, Building2, Vote } from "lucide-react";
+import { Brain, Briefcase, Building2, Vote, CheckCircle2 } from "lucide-react";
 
 const experiences = [
   {
@@ -7,7 +7,12 @@ const experiences = [
     role: "Data Annotator",
     company: "Outlier (Progetto Aether)",
     description:
-      "Annotazione e revisione di dati multimodali per l'addestramento di modelli AI generativa. Valutazione qualitativa delle risposte generate e sviluppo di pensiero critico applicato alla valutazione di output AI.",
+      "Qui ho scoperto il mondo dell'AI da dietro le quinte: rivedo dati, valuto risposte generate e aiuto i modelli a diventare più intelligenti. È un lavoro che mi fa pensare tantissimo — e mi ha insegnato a essere critica in modo costruttivo.",
+    highlights: [
+      "Lavoro con testi, codice e ragionamento logico",
+      "Valuto le risposte AI con criteri che cambiano spesso (il bello è adattarsi)",
+      "Ho sviluppato un occhio critico che uso anche nel mio codice",
+    ],
     icon: Brain,
     current: true,
   },
@@ -16,7 +21,12 @@ const experiences = [
     role: "Segretaria d'ufficio",
     company: "ALGECO Power",
     description:
-      "Gestione autonoma delle comunicazioni, utilizzo avanzato di Excel, pianificazione delle attività operative e utilizzo quotidiano di CRM aziendali per il coordinamento con i team operativi.",
+      "Il mio primo lavoro \"vero\". Gestisco email, organizzo documenti, uso Excel come se fosse un'estensione del mio cervello. E quando hanno avuto bisogno di un sito nuovo? Ho alzato la mano e ho iniziato a costruirlo in React.",
+    highlights: [
+      "Ho imparato a gestire mille cose contemporaneamente",
+      "Mi sono proposta per costruire il nuovo sito aziendale (in React!)",
+      "Excel è diventato il mio migliore amico",
+    ],
     icon: Building2,
     current: true,
   },
@@ -25,7 +35,12 @@ const experiences = [
     role: "Back-office commerciale",
     company: "SELEKTA",
     description:
-      "Gestione chiamate outbound e supporto telefonico clienti, finalizzazione di pratiche contrattuali e utilizzo di CRM aziendali per il monitoraggio e la reportistica interna.",
+      "Chiamate, pratiche, CRM. Non era il lavoro dei miei sogni, ma mi ha insegnato a comunicare con le persone, a essere precisa e a lavorare sotto pressione. Cose che uso ogni giorno anche quando scrivo codice.",
+    highlights: [
+      "Ho parlato con decine di persone ogni giorno",
+      "Ho imparato la precisione documentale (utile anche nel codice)",
+      "Ho capito cosa significa lavorare in team sul serio",
+    ],
     icon: Briefcase,
     current: false,
   },
@@ -34,7 +49,11 @@ const experiences = [
     role: "Scrutatrice di seggio",
     company: "Elezioni Europee",
     description:
-      "Supporto alle operazioni di voto e scrutinio nel rispetto delle procedure istituzionali, verifica identità elettori e compilazione verbali ufficiali.",
+      "Una di quelle esperienze che fai una volta e ti rimangono. Due giorni intensi, pieni di responsabilità e attenzione ai dettagli.",
+    highlights: [
+      "La prima volta che ho avuto una responsabilità istituzionale",
+      "Ho compilato verbali ufficiali senza fare un errore",
+    ],
     icon: Vote,
     current: false,
   },
@@ -42,67 +61,96 @@ const experiences = [
 
 const ExperienceSection = () => {
   return (
-    <section id="esperienze" className="py-24 px-6 bg-section-light">
-      <div className="max-w-4xl mx-auto">
+    <section id="esperienze" className="py-28 px-6 bg-section-light relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[120px]" />
+
+      <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
         >
           <p className="text-sm font-body tracking-[0.3em] uppercase text-primary mb-3">
             Esperienza
           </p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-12 text-foreground">
-            Percorso <span className="italic text-primary">professionale</span>
+          <h2 className="text-4xl md:text-6xl font-display font-bold mb-4 text-foreground">
+            La strada{" "}
+            <span className="text-primary italic">fin qui</span>
           </h2>
+          <p className="text-muted-foreground font-body max-w-2xl text-lg mb-14 leading-relaxed">
+            Non ho seguito un percorso lineare, ma ogni esperienza mi ha dato qualcosa. Ecco le tappe più importanti.
+          </p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-[19px] top-0 bottom-0 w-px bg-border md:left-[23px]" />
+          {/* Animated vertical line */}
+          <motion.div
+            initial={{ height: 0 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute left-[23px] top-0 w-px bg-gradient-to-b from-primary/40 via-border to-transparent md:left-[27px]"
+          />
 
-          <div className="space-y-10">
+          <div className="space-y-8">
             {experiences.map((exp, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
-                className="relative pl-14 md:pl-16 group"
+                transition={{ duration: 0.6, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                className="relative pl-16 md:pl-20 group"
               >
-                {/* Timeline dot */}
-                <div
-                  className={`absolute left-0 top-1 w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center border-2 z-10 transition-colors ${
-                    exp.current
-                      ? "bg-background border-primary before:absolute before:inset-[2px] before:rounded-[0.6rem] before:bg-primary/10"
-                      : "bg-card border-border group-hover:border-primary/40"
-                  }`}
-                >
-                  <exp.icon
-                    className={`w-5 h-5 ${exp.current ? "text-primary" : "text-muted-foreground group-hover:text-primary transition-colors"}`}
-                  />
+                {/* Timeline dot with pulse */}
+                <div className="absolute left-0 top-2">
+                  {exp.current && (
+                    <div className="absolute inset-0 w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primary/10 animate-ping" style={{ animationDuration: "3s" }} />
+                  )}
+                  <div
+                    className={`relative w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center z-10 transition-all duration-300 ${
+                      exp.current
+                      ? "bg-card border-2 border-primary/30 shadow-md shadow-primary/5"
+                      : "bg-card border border-border group-hover:border-primary/30"
+                    }`}
+                  >
+                    <exp.icon
+                      className={`w-5 h-5 md:w-6 md:h-6 ${exp.current ? "text-primary" : "text-muted-foreground group-hover:text-primary transition-colors"}`}
+                    />
+                  </div>
                 </div>
 
-                <div className="bg-card rounded-xl border border-border p-6 hover:border-primary/30 transition-colors">
-                  <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <span className="text-xs font-body px-3 py-1 rounded-full bg-secondary text-muted-foreground">
+                <motion.div
+                  whileHover={{ y: -3, scale: 1.01 }}
+                  className="bg-card rounded-2xl border border-border p-6 md:p-7 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-[border-color,box-shadow] duration-500 cursor-default"
+                >
+                  <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <span className="text-xs font-body px-3 py-1 rounded-full bg-muted/50 text-muted-foreground border border-border/50">
                       {exp.period}
                     </span>
                     {exp.current && (
-                      <span className="text-xs font-body px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">
+                      <span className="text-xs font-body px-3 py-1 rounded-full bg-primary/10 text-primary font-medium border border-primary/20">
                         Attuale
                       </span>
                     )}
                   </div>
-                  <h3 className="text-xl font-display font-semibold text-foreground mb-1">
+                  <h3 className="text-xl md:text-2xl font-display font-bold text-foreground mb-1">
                     {exp.role}
                   </h3>
-                  <p className="text-sm font-body text-primary font-medium mb-3">{exp.company}</p>
-                  <p className="text-muted-foreground font-body leading-relaxed">{exp.description}</p>
-                </div>
+                  <p className="text-sm font-body text-primary font-semibold mb-3">{exp.company}</p>
+                  <p className="text-muted-foreground font-body leading-relaxed mb-4">{exp.description}</p>
+                  <ul className="space-y-2">
+                    {exp.highlights.map((h, j) => (
+                      <li key={j} className="flex items-start gap-2 text-sm font-body text-muted-foreground">
+                        <CheckCircle2 className="w-4 h-4 text-primary/60 mt-0.5 shrink-0" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
               </motion.div>
             ))}
           </div>

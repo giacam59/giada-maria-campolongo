@@ -1,87 +1,121 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, Linkedin, MapPin, Send } from "lucide-react";
+import { Mail, Phone, Linkedin, MapPin, ArrowUpRight } from "lucide-react";
+
+const contacts = [
+  {
+    icon: Mail,
+    label: "Email",
+    value: "giacam2005@gmail.com",
+    href: "mailto:giacam2005@gmail.com",
+    external: false,
+  },
+  {
+    icon: Phone,
+    label: "Telefono",
+    value: "+39 351 941 7402",
+    href: "tel:+393519417402",
+    external: false,
+  },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    value: "gm-campolongo",
+    href: "https://www.linkedin.com/in/gm-campolongo/",
+    external: true,
+  },
+  {
+    icon: MapPin,
+    label: "Posizione",
+    value: "Torino, Italia",
+    href: null,
+    external: false,
+  },
+];
 
 const ContactSection = () => {
   return (
-    <section id="contatti" className="py-24 px-6 bg-section-alt relative overflow-hidden">
-      {/* Decorative */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-primary/[0.03] rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/[0.04] rounded-full blur-3xl -z-10" />
+    <section id="contatti" className="py-28 px-6 bg-section-alt relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/[0.04] rounded-full blur-[150px]" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary/[0.5] rounded-full blur-[120px]" />
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16"
         >
           <p className="text-sm font-body tracking-[0.3em] uppercase text-primary mb-3">Contatti</p>
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-4 text-foreground">
-            Restiamo in <span className="italic text-primary">contatto</span>
+          <h2 className="text-4xl md:text-6xl font-display font-bold mb-4 text-foreground">
+            Facciamoci <span className="text-primary italic">sentire</span>
           </h2>
           <p className="text-muted-foreground font-body max-w-md mx-auto text-lg">
-            Sei interessato a collaborare o vuoi saperne di più? Non esitare a contattarmi.
+            Se hai un'idea, una domanda, o anche solo voglia di fare due chiacchiere sul web, scrivimi!
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          {/* Contact cards */}
-          {[
-            {
-              icon: Mail,
-              label: "Email",
-              value: "giacam2005@gmail.com",
-              href: "mailto:giacam2005@gmail.com",
-            },
-            {
-              icon: Phone,
-              label: "Telefono",
-              value: "+39 351 941 7402",
-              href: "tel:+393519417402",
-            },
-            {
-              icon: Linkedin,
-              label: "LinkedIn",
-              value: "gm-campolongo",
-              href: "https://www.linkedin.com/in/gm-campolongo/",
-              external: true,
-            },
-            {
-              icon: MapPin,
-              label: "Posizione",
-              value: "Napoli, Italia",
-              href: null,
-            },
-          ].map((item, i) => (
+        {/* CTA big card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="bg-card border border-border rounded-3xl p-8 md:p-12 mb-10 text-center hover:shadow-lg hover:shadow-primary/5 transition-shadow relative overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/30" />
+          <div className="relative z-10">
+            <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-4">
+              Ti va di costruire qualcosa insieme?
+            </h3>
+            <p className="text-muted-foreground font-body mb-8 max-w-md mx-auto">
+              Che sia un progetto serio o un'idea folle, mi piace ascoltare. La mia inbox è sempre aperta.
+            </p>
+            <motion.a
+              href="mailto:giacam2005@gmail.com"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-display font-bold rounded-xl text-lg hover:shadow-lg hover:shadow-primary/25 transition-shadow"
+            >
+              <Mail className="w-5 h-5" />
+              Scrivimi
+            </motion.a>
+          </div>
+        </motion.div>
+
+        {/* Contact cards grid */}
+        <div className="grid sm:grid-cols-2 gap-4">
+          {contacts.map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               {item.href ? (
-                <a
+                <motion.a
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-4 p-5 bg-card rounded-xl border border-border hover:border-primary/40 transition-all group"
+                  whileHover={{ y: -3, scale: 1.01 }}
+                  className="flex items-center gap-4 p-5 bg-card border border-border rounded-2xl hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 transition-[border-color,box-shadow] duration-500 group"
                 >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 group-hover:shadow-lg group-hover:shadow-primary/10 transition-all duration-300">
                     <item.icon className="w-5 h-5 text-primary" />
                   </div>
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <p className="text-xs font-body text-muted-foreground uppercase tracking-wider">{item.label}</p>
-                    <p className="font-body text-foreground group-hover:text-primary transition-colors font-medium">
+                    <p className="font-body text-foreground group-hover:text-primary transition-colors font-medium truncate">
                       {item.value}
                     </p>
                   </div>
-                  <Send className="w-4 h-4 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
-                </a>
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:text-primary transition-all duration-300 -translate-y-1 group-hover:translate-y-0" />
+                </motion.a>
               ) : (
-                <div className="flex items-center gap-4 p-5 bg-card rounded-xl border border-border">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <div className="flex items-center gap-4 p-5 bg-card border border-border rounded-2xl">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                     <item.icon className="w-5 h-5 text-primary" />
                   </div>
                   <div>
@@ -93,7 +127,6 @@ const ContactSection = () => {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
