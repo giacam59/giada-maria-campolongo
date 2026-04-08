@@ -30,7 +30,7 @@ const steps = [
 
 const ApproachSection = () => {
   return (
-    <section className="py-28 px-6 bg-section-alt relative overflow-hidden">
+    <section className="pt-10 pb-28 px-6 bg-section-alt relative overflow-hidden">
       {/* Background */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-[150px]" />
 
