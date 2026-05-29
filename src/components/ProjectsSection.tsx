@@ -7,30 +7,32 @@ import { useRef } from "react";
 const projects = [
   {
     title: "Micromihai",
-    role: "Idea, design e codice — tutto mio",
+    role: "Design, sviluppo e integrazioni",
     description:
-      "Un amico artista aveva bisogno di un sito. Ho colto l'occasione al volo: React, TypeScript, multilingua, animazioni, notifiche Telegram... è il progetto dove ho messo dentro tutto quello che sapevo (e ho imparato un sacco di cose nuove).",
+      "Un sito portfolio multilingua per un artista. Ho curato struttura, interfaccia, animazioni e un form contatti collegato a Telegram.",
     highlights: [
       "Tre lingue: italiano, inglese e rumeno",
       "Backend serverless con Netlify Functions",
-      "Form contatti che mi avvisa su Telegram",
+      "Notifiche Telegram per i nuovi messaggi",
       "Performance Lighthouse sopra il 95",
     ],
+    outcomes: ["Multilingua", "Telegram form", "Lighthouse 95+"],
     image: micromihai,
     url: "https://micromihai.com",
     tags: ["React", "TypeScript", "i18next", "Netlify Functions"],
   },
   {
     title: "ALGECO Power",
-    role: "Nato da un'idea in ufficio",
+    role: "Prototipo web aziendale",
     description:
-      "Quando ho visto il sito della mia azienda, ho pensato: \"posso fare di meglio\". Così ho progettato e sviluppato un prototipo completamente nuovo, da zero, durante il tempo libero.",
+      "Un prototipo nato osservando il sito dell'azienda in cui lavoro. Ho ripensato struttura, layout mobile e modo di presentare servizi e contatti.",
     highlights: [
       "Design system creato da zero",
-      "Prima volta con un progetto mobile-first completo",
-      "Ho imparato a pensare in termini di UX reale",
-      "Il mio capo è rimasto impressionato (vittoria!)",
+      "Layout pensato prima per mobile",
+      "Contenuti organizzati intorno ai bisogni degli utenti",
+      "Progetto proposto internamente e sviluppato in autonomia",
     ],
+    outcomes: ["Mobile-first", "Design system", "Prototipo interno"],
     image: algecopower,
     url: "https://algecopower.netlify.app",
     tags: ["React", "TypeScript", "Web Design", "Responsive"],
@@ -120,6 +122,16 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
           <p className="text-sm font-body text-muted-foreground leading-relaxed mb-4">
             {project.description}
           </p>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.outcomes.map((outcome) => (
+              <span
+                key={outcome}
+                className="text-xs font-body px-3 py-1.5 rounded-md bg-muted/70 text-foreground border border-border/70"
+              >
+                {outcome}
+              </span>
+            ))}
+          </div>
           <ul className="space-y-1.5 mb-5 flex-1">
             {project.highlights.map((h, j) => (
               <li key={j} className="flex items-start gap-2 text-xs font-body text-muted-foreground">
@@ -165,7 +177,7 @@ const ProjectsSection = () => {
             Cose che ho <span className="text-primary italic">costruito</span>
           </h2>
           <p className="text-muted-foreground font-body max-w-lg mx-auto text-lg">
-            Ogni progetto ha una storia dietro. Ecco quelli a cui tengo di più.
+            Due lavori diversi, ma con la stessa idea di base: rendere un sito più chiaro, utile e piacevole da usare.
           </p>
         </motion.div>
 

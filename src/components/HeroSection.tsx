@@ -4,10 +4,10 @@ import profileImg from "@/assets/profile.jpg";
 import { useState, useEffect } from "react";
 
 const roles = [
-  "curiosa per natura",
-  "innamorata del web",
-  "sempre in evoluzione",
-  "a caccia di ispirazione",
+  "Frontend Developer",
+  "Web Designer",
+  "Data Annotator",
+  "Office Administrator",
 ];
 
 const HeroSection = () => {
@@ -78,7 +78,7 @@ const HeroSection = () => {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 glass glow-border"
           >
             <span className="text-xs font-body font-medium text-foreground/80 tracking-wide">
-              Ciao, benvenuto nel mio angolo di internet ✋
+              Sviluppo web, design e un po' di organizzazione pratica
             </span>
           </motion.div>
 
@@ -101,28 +101,28 @@ const HeroSection = () => {
           </div>
 
           <p className="text-base md:text-lg font-body text-muted-foreground max-w-lg leading-relaxed mb-10">
-            Ho vent'anni, vivo tra codice e creatività, e qui racconto il mio percorso — tra progetti, esperimenti e tutto quello che imparo strada facendo.
+            Mi piace costruire interfacce pulite con React e TypeScript, ma anche tenere in ordine
+            informazioni, documenti e processi. Qui trovi quello che so fare, i progetti su cui ho
+            lavorato e i CV più adatti a ogni ruolo.
           </p>
 
           <div className="flex flex-wrap gap-4">
             <motion.a
-              href="#chi-sono"
+              href="#progetti"
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-semibold rounded-xl hover:shadow-lg hover:shadow-primary/25 transition-shadow"
             >
-              Scopri la mia storia
+              Guarda i progetti
             </motion.a>
             <motion.a
-              href="/cv.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#cv"
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center gap-2 px-7 py-3.5 border border-border font-display font-semibold rounded-xl text-foreground hover:bg-card transition-colors"
             >
               <Download className="w-4 h-4" />
-              Scarica CV
+              Scegli CV
             </motion.a>
           </div>
         </motion.div>

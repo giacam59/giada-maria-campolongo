@@ -7,12 +7,13 @@ const experiences = [
     role: "Data Annotator",
     company: "Outlier",
     description:
-      "Qui ho scoperto il mondo dell'AI da dietro le quinte: rivedevo dati, valutavo risposte generate e aiutavo i modelli a diventare più intelligenti. È stata un'esperienza che mi ha fatto pensare tantissimo — e mi ha insegnato a essere critica in modo costruttivo.",
+      "Ho valutato risposte generate da AI, controllando contenuti, ragionamento e coerenza. È stato un lavoro molto utile per allenare precisione e pensiero critico.",
     highlights: [
       "Ho lavorato con testi, codice e ragionamento logico",
-      "Valutavo le risposte AI con criteri che cambiavano spesso (il bello era adattarsi)",
-      "Ho sviluppato un occhio critico che uso ancora oggi nel mio codice",
+      "Valutavo risposte AI seguendo rubriche e criteri in evoluzione",
+      "Ho sviluppato un occhio critico che uso anche quando progetto interfacce",
     ],
+    result: "Ho imparato a leggere con più attenzione e a motivare meglio le mie valutazioni",
     icon: Brain,
     current: false,
   },
@@ -21,12 +22,13 @@ const experiences = [
     role: "Segretaria d'ufficio",
     company: "ALGECO Power",
     description:
-      "Il mio primo lavoro \"vero\". Gestisco email, organizzo documenti, uso Excel come se fosse un'estensione del mio cervello. E quando hanno avuto bisogno di un sito nuovo? Ho alzato la mano e ho iniziato a costruirlo in React.",
+      "Mi occupo di segreteria, documenti, email, Excel e supporto operativo. In parallelo ho proposto un nuovo prototipo per il sito aziendale e l'ho sviluppato in React.",
     highlights: [
-      "Ho imparato a gestire mille cose contemporaneamente",
-      "Mi sono proposta per costruire il nuovo sito aziendale (in React!)",
-      "Excel è diventato il mio migliore amico",
+      "Gestione quotidiana di documenti, email e attività amministrative",
+      "Prototipo del nuovo sito aziendale sviluppato in React",
+      "Uso di Excel e organizzazione dati per supportare il lavoro interno",
     ],
+    result: "Ho unito lavoro d'ufficio e sviluppo web in un progetto nato da un bisogno reale",
     icon: Building2,
     current: true,
   },
@@ -35,12 +37,13 @@ const experiences = [
     role: "Back-office commerciale",
     company: "SELEKTA",
     description:
-      "Chiamate, pratiche, CRM. Non era il lavoro dei miei sogni, ma mi ha insegnato a comunicare con le persone, a essere precisa e a lavorare sotto pressione. Cose che uso ogni giorno anche quando scrivo codice.",
+      "Ho gestito chiamate, pratiche e CRM in un contesto commerciale. Non era il mio punto d'arrivo, ma mi ha insegnato tanto su comunicazione, ritmo e precisione.",
     highlights: [
       "Ho parlato con decine di persone ogni giorno",
       "Ho imparato la precisione documentale (utile anche nel codice)",
-      "Ho capito cosa significa lavorare in team sul serio",
+      "Ho rafforzato metodo, ascolto e lavoro in team",
     ],
+    result: "Sono diventata più sicura nel parlare con le persone e nel seguire procedure precise",
     icon: Briefcase,
     current: false,
   },
@@ -49,11 +52,12 @@ const experiences = [
     role: "Scrutatrice di seggio",
     company: "Elezioni Europee",
     description:
-      "Una di quelle esperienze che fai una volta e ti rimangono. Due giorni intensi, pieni di responsabilità e attenzione ai dettagli.",
+      "Ho supportato le operazioni di voto per due giorni, occupandomi anche di verbali e controlli. Un'esperienza breve, ma molto concreta.",
     highlights: [
       "La prima volta che ho avuto una responsabilità istituzionale",
       "Ho compilato verbali ufficiali senza fare un errore",
     ],
+    result: "Ho gestito documenti ufficiali con attenzione e senso di responsabilità",
     icon: Vote,
     current: false,
   },
@@ -80,7 +84,7 @@ const ExperienceSection = () => {
             <span className="text-primary italic">fin qui</span>
           </h2>
           <p className="text-muted-foreground font-body max-w-2xl text-lg mb-14 leading-relaxed">
-            Non ho seguito un percorso lineare, ma ogni esperienza mi ha dato qualcosa. Ecco le tappe più importanti.
+            Ogni esperienza mi ha lasciato qualcosa: più metodo, più attenzione ai dettagli e più consapevolezza di come si lavora con le persone.
           </p>
         </motion.div>
 
@@ -142,6 +146,14 @@ const ExperienceSection = () => {
                   </h3>
                   <p className="text-sm font-body text-primary font-semibold mb-3">{exp.company}</p>
                   <p className="text-muted-foreground font-body leading-relaxed mb-4">{exp.description}</p>
+                  <div className="mb-4 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3">
+                    <p className="text-xs font-body uppercase tracking-[0.18em] text-primary mb-1">
+                      Risultato
+                    </p>
+                    <p className="text-sm font-body text-foreground">
+                      {exp.result}
+                    </p>
+                  </div>
                   <ul className="space-y-2">
                     {exp.highlights.map((h, j) => (
                       <li key={j} className="flex items-start gap-2 text-sm font-body text-muted-foreground">

@@ -33,22 +33,19 @@ const AboutSection = () => {
             <p className="text-muted-foreground font-body leading-relaxed text-lg">
               Mi chiamo Giada, ho vent'anni e vengo da Napoli. Mi sono diplomata al Liceo Elsa Morante
               con indirizzo economico-sociale e un voto di{" "}
-              <span className="text-primary font-semibold">100/100</span> (sì, ne vado fiera).
-              Il web è diventato la mia passione quasi per caso: ho iniziato a smanettare con HTML per curiosità,
-              e da lì non mi sono più fermata. Oggi studio Web Design, lavoro come Data Annotator per l'AI,
-              e nel tempo libero costruisco cose con React e TypeScript — tipo questo sito.
+              <span className="text-primary font-semibold">100/100</span>. Oggi vivo a Torino,
+              studio Web Design e sto cercando di costruire un profilo che tenga insieme codice,
+              cura visuale e precisione nel lavoro di tutti i giorni.
             </p>
             <p className="text-muted-foreground font-body leading-relaxed text-lg">
-              Quasi tutto quello che so l'ho imparato da sola — a forza di tutorial, documentazione
-              e tanta ostinazione. Se non sto imparando qualcosa di nuovo, probabilmente sto dormendo.
-              O forse neanche quello.
+              Ho iniziato dal web per curiosità. Poi React, TypeScript e UI design sono diventati
+              il posto in cui mi piace sperimentare. Il lavoro d'ufficio, invece, mi ha insegnato
+              a gestire priorità, documenti e persone senza perdere il filo.
             </p>
             <p className="text-muted-foreground font-body leading-relaxed text-lg">
-              Sono quella che allinea pixel, sistema spaziature e riscrive codice tre volte.
-              Lo so, è un problema. Ma anche un superpotere.
-            </p>
-            <p className="text-muted-foreground font-body leading-relaxed text-lg">
-              Ah, e funziono a caffè. Tanto caffè. ☕
+              Mi piacciono le cose fatte con attenzione: interfacce leggibili, file ordinati,
+              comunicazione chiara e piccoli miglioramenti continui. Imparo in fretta, faccio domande
+              e preferisco costruire qualcosa di solido prima di aggiungere il superfluo.
             </p>
           </motion.div>
 
@@ -72,9 +69,9 @@ const AboutSection = () => {
                   <div className="font-mono text-xs text-muted-foreground/70 space-y-1.5">
                     <p><span className="text-primary/70">const</span> giada = {"{"}</p>
                     <p className="pl-4">città: <span className="text-primary">"Napoli → Torino"</span>,</p>
-                    <p className="pl-4">carburante: <span className="text-primary">"☕☕☕"</span>,</p>
-                    <p className="pl-4">mood: <span className="text-primary">"sempre curiosa"</span>,</p>
-                    <p className="pl-4">bug: <span className="text-primary">"pochi (spero)"</span>,</p>
+                    <p className="pl-4">focus: <span className="text-primary">"frontend + operatività"</span>,</p>
+                    <p className="pl-4">mood: <span className="text-primary">"curiosa, precisa"</span>,</p>
+                    <p className="pl-4">stack: <span className="text-primary">"React, TS, UI"</span>,</p>
                     <p>{"}"}</p>
                   </div>
                 </div>
@@ -84,7 +81,7 @@ const AboutSection = () => {
                     transition={{ duration: 2, repeat: Infinity }}
                     className="w-2 h-2 rounded-full bg-primary/40"
                   />
-                  <span className="text-[10px] font-body text-muted-foreground/60">sempre in fase di refactor</span>
+                  <span className="text-[10px] font-body text-muted-foreground/60">in crescita, con metodo</span>
                 </div>
               </div>
             </div>
@@ -139,7 +136,7 @@ const AboutSection = () => {
           className="mb-16 pl-6 border-l-4 border-primary/30"
         >
           <p className="text-lg md:text-xl font-display italic text-foreground/80 leading-relaxed">
-            "Il bello di questo mestiere è che non smetti mai di sentirti una principiante — e a me questa cosa piace un sacco."
+            "Mi piace quando una cosa complicata diventa più chiara: una schermata più leggibile, un file più ordinato, un passaggio in meno da spiegare."
           </p>
         </motion.blockquote>
 

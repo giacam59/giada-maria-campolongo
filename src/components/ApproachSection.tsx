@@ -5,26 +5,26 @@ const steps = [
   {
     num: "01",
     icon: Lightbulb,
-    title: "Mi faccio un sacco di domande",
-    desc: "Prima di scrivere una riga di codice, cerco di capire davvero il problema. Chi userà questo sito? Cosa deve fare? Cosa già esiste là fuori?",
+    title: "Capisco il contesto",
+    desc: "Prima di aprire l'editor cerco di capire a cosa serve davvero il progetto, per chi è pensato e quali contenuti deve reggere.",
   },
   {
     num: "02",
     icon: PenTool,
-    title: "Schizzo, provo, cambio idea",
-    desc: "Disegno wireframe, faccio mockup, chiedo pareri. A volte butto tutto e ricomincio. Fa parte del processo.",
+    title: "Disegno la struttura",
+    desc: "Metto in ordine sezioni, gerarchie e prime scelte visive, così il design non nasce solo dal gusto ma anche dalla funzione.",
   },
   {
     num: "03",
     icon: Code2,
-    title: "Scrivo codice (e lo riscrivo)",
-    desc: "React, TypeScript, componenti modulari. Testo su mobile, su desktop, sul telefono di mia madre. Se funziona ovunque, sono felice.",
+    title: "Sviluppo componenti",
+    desc: "Costruisco componenti responsive con React e TypeScript, cercando di mantenerli semplici da leggere e modificare.",
   },
   {
     num: "04",
     icon: Rocket,
-    title: "Online e poi si migliora",
-    desc: "Pubblico, controllo le performance, sistemo i bug. Un sito non è mai \"finito\" — è solo alla versione attuale.",
+    title: "Misuro e miglioro",
+    desc: "Riguardo mobile, testi, performance e dettagli finali. Di solito è lì che un progetto inizia a sembrare davvero finito.",
   },
 ];
 
@@ -48,7 +48,7 @@ const ApproachSection = () => {
             Come <span className="text-primary italic">lavoro</span>
           </h2>
           <p className="text-muted-foreground font-body max-w-2xl text-lg mb-14 leading-relaxed">
-            Non ho un metodo da manuale, ma col tempo ho trovato il mio modo di fare le cose. Più o meno funziona così:
+            Non ho una formula magica: provo a capire bene, costruire con ordine e rifinire senza avere fretta.
           </p>
         </motion.div>
 

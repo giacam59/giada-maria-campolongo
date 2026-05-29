@@ -6,36 +6,36 @@
 
 @layer base {
   :root {
-    --background: 30 30% 96%;
-    --foreground: 20 15% 15%;
+    --background: 220 33% 98%;
+    --foreground: 221 24% 13%;
 
-    --card: 30 25% 93%;
-    --card-foreground: 20 15% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 221 24% 13%;
 
-    --popover: 30 30% 96%;
-    --popover-foreground: 20 15% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 221 24% 13%;
 
-    --primary: 12 55% 52%;
-    --primary-foreground: 30 30% 97%;
+    --primary: 346 48% 45%;
+    --primary-foreground: 220 33% 98%;
 
-    --secondary: 30 20% 88%;
-    --secondary-foreground: 20 12% 30%;
+    --secondary: 225 24% 94%;
+    --secondary-foreground: 221 24% 20%;
 
-    --muted: 30 15% 90%;
-    --muted-foreground: 20 8% 46%;
+    --muted: 225 18% 92%;
+    --muted-foreground: 220 9% 45%;
 
-    --accent: 12 55% 52%;
-    --accent-foreground: 30 30% 97%;
+    --accent: 346 49% 29%;
+    --accent-foreground: 220 33% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 25 18% 86%;
-    --input: 25 18% 86%;
-    --ring: 12 55% 52%;
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 346 48% 45%;
 
-    --section-light: 30 30% 96%;
-    --section-alt: 25 22% 93%;
+    --section-light: 220 33% 98%;
+    --section-alt: 225 28% 96%;
     --radius: 0.75rem;
 
     --font-display: 'Playfair Display', serif;
@@ -66,22 +66,22 @@
   }
 
   ::selection {
-    background: hsl(12 55% 52% / 0.2);
-    color: hsl(20 15% 15%);
+    background: hsl(346 48% 45% / 0.18);
+    color: hsl(221 24% 13%);
   }
 
   ::-webkit-scrollbar {
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: hsl(30 30% 96%);
+    background: hsl(220 33% 98%);
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(12 55% 52% / 0.25);
+    background: hsl(346 48% 45% / 0.25);
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(12 55% 52% / 0.4);
+    background: hsl(346 48% 45% / 0.4);
   }
 }
 
@@ -97,21 +97,21 @@
   }
 
   .glass {
-    background: hsl(30 25% 97% / 0.7);
+    background: hsl(220 33% 99% / 0.78);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid hsl(25 18% 86% / 0.7);
+    border: 1px solid hsl(214 20% 88% / 0.75);
   }
 
   .glass-strong {
-    background: hsl(30 25% 97% / 0.9);
+    background: hsl(220 33% 99% / 0.92);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid hsl(25 18% 86% / 0.8);
+    border: 1px solid hsl(214 20% 88% / 0.85);
   }
 
   .glow {
-    box-shadow: 0 4px 30px hsl(12 55% 52% / 0.08), 0 1px 8px hsl(12 55% 52% / 0.04);
+    box-shadow: 0 4px 30px hsl(346 48% 45% / 0.08), 0 1px 8px hsl(346 49% 29% / 0.04);
   }
 
   .glow-text {
@@ -119,21 +119,21 @@
   }
 
   .glow-border {
-    border-color: hsl(12 55% 52% / 0.25);
-    box-shadow: 0 2px 12px hsl(12 55% 52% / 0.06);
+    border-color: hsl(346 48% 45% / 0.22);
+    box-shadow: 0 2px 12px hsl(346 48% 45% / 0.06);
   }
 
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(12 55% 48%), hsl(20 65% 55%));
+    background-image: linear-gradient(135deg, hsl(346 49% 29%), hsl(346 48% 45%));
     background-size: 100% 100%;
   }
 
   .mesh-gradient {
     background:
-      radial-gradient(ellipse at 70% 20%, hsl(12 55% 52% / 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 20% 80%, hsl(30 40% 70% / 0.08) 0%, transparent 50%),
-      hsl(30 30% 96%);
+      radial-gradient(ellipse at 70% 20%, hsl(346 48% 45% / 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 80%, hsl(221 24% 13% / 0.04) 0%, transparent 50%),
+      hsl(220 33% 98%);
   }
 
   .animate-float {
@@ -180,7 +180,7 @@
   position: absolute;
   width: 2px;
   height: 2px;
-  background: hsl(12 55% 52% / 0.2);
+  background: hsl(346 48% 45% / 0.2);
   border-radius: 50%;
   animation: particle-float linear infinite;
 }

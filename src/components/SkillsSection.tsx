@@ -12,21 +12,21 @@ type SkillCategory = {
 const skillCategories: SkillCategory[] = [
   {
     title: "Sviluppo Web",
-    description: "Il mio pane quotidiano. Ho iniziato con HTML e CSS, poi è arrivato JavaScript e non sono più tornata indietro. Da poco sto esplorando anche Python per scripting e automatizzazioni.",
+    description: "Creo pagine e componenti responsive, cercando di tenere il codice leggibile e facile da riprendere.",
     icon: Code2,
     color: "bg-primary/10 text-primary border-primary/20",
     skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React.js", "Python", "Vite", "Tailwind CSS"],
   },
   {
     title: "Design & Multimedia",
-    description: "Mi piace che le cose siano belle. Photoshop, Illustrator e Canva sono i miei compagni creativi.",
+    description: "Mi piace dare forma alle idee con wireframe, UI pulite e contenuti visuali coerenti.",
     icon: PenTool,
     color: "bg-orange-500/10 text-orange-600 border-orange-500/20",
     skills: ["Photoshop", "Illustrator", "Premiere Pro", "Canva", "UI Design"],
   },
   {
     title: "Strumenti del mestiere",
-    description: "Excel, CRM, Git... tutto quello che serve a non perdersi nel caos di un progetto (o di un ufficio).",
+    description: "Uso gli strumenti pratici del lavoro quotidiano per tenere ordinati dati, file e attività.",
     icon: Wrench,
     color: "bg-amber-600/10 text-amber-700 border-amber-600/20",
     skills: ["Microsoft Office", "Excel avanzato", "CRM", "Git", "Navigazione web"],
@@ -53,7 +53,7 @@ const SkillsSection = () => {
             Cosa so <span className="text-primary italic">fare</span>
           </h2>
           <p className="text-muted-foreground font-body max-w-2xl text-lg mb-14 leading-relaxed">
-            Non sono una tuttofare, ma le cose che so le so bene (e quelle che non so, le sto imparando).
+            Un mix di strumenti tecnici, visuali e operativi che sto usando e approfondendo progetto dopo progetto.
           </p>
         </motion.div>
 

@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import ProfilePathsSection from "@/components/ProfilePathsSection";
 import AboutSection from "@/components/AboutSection";
+import ValueSection from "@/components/ValueSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import SkillsSection from "@/components/SkillsSection";
 import ApproachSection from "@/components/ApproachSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import ResumeSection from "@/components/ResumeSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
@@ -35,11 +38,14 @@ const Index = () => {
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
       <HeroSection />
+      <ProfilePathsSection />
       <AboutSection />
+      <ValueSection />
       <ExperienceSection />
       <SkillsSection />
       <ApproachSection />
       <ProjectsSection />
+      <ResumeSection />
       <ContactSection />
       <Footer />
     </div>

@@ -3,10 +3,11 @@ import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { label: "Chi sono", href: "#chi-sono" },
+  { label: "Profili", href: "#profili" },
   { label: "Esperienze", href: "#esperienze" },
   { label: "Competenze", href: "#competenze" },
   { label: "Progetti", href: "#progetti" },
+  { label: "CV", href: "#cv" },
   { label: "Contatti", href: "#contatti" },
 ];
 
@@ -34,13 +35,30 @@ const Navbar = () => {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#" className="font-signature text-2xl text-foreground group">
-            Giada<span className="text-primary">.</span>C
+        <div className="max-w-6xl mx-auto px-6 h-[4.5rem] flex items-center justify-between">
+          <a
+            href="#"
+            aria-label="Torna all'inizio"
+            className="group inline-flex items-center gap-3 min-w-0"
+          >
+            <span className="relative grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-lg bg-foreground text-primary-foreground shadow-sm transition-transform duration-300 group-hover:-translate-y-0.5">
+              <span className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-accent opacity-95" />
+              <span className="relative font-display text-[1.05rem] font-bold tracking-normal">
+                GC
+              </span>
+            </span>
+            <span className="hidden sm:flex flex-col leading-none">
+              <span className="font-display text-base font-bold text-foreground tracking-normal">
+                Giada Maria Campolongo
+              </span>
+              <span className="mt-1 font-body text-[0.68rem] uppercase tracking-[0.2em] text-muted-foreground">
+                Web portfolio
+              </span>
+            </span>
           </a>
 
           {/* Desktop */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1 rounded-xl border border-border/70 bg-card/70 px-1.5 py-1.5 shadow-sm backdrop-blur">
             {links.map((l, i) => (
               <motion.a
                 key={l.href}
@@ -48,19 +66,26 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * i + 0.3 }}
-                className="relative px-4 py-2 text-sm font-body text-muted-foreground hover:text-foreground transition-colors group"
+                className={`relative rounded-lg px-3.5 py-2 text-sm font-body font-medium transition-colors group ${
+                  l.href === "#cv"
+                    ? "bg-primary text-primary-foreground shadow-sm hover:bg-primary/95"
+                    : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+                }`}
               >
                 {l.label}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-primary group-hover:w-2/3 transition-all duration-300 rounded-full" />
+                {l.href !== "#cv" && (
+                  <span className="absolute bottom-1 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-primary transition-all duration-300 group-hover:w-1/2" />
+                )}
               </motion.a>
             ))}
           </div>
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden relative w-10 h-10 rounded-lg glass flex items-center justify-center text-foreground"
+            className="md:hidden relative w-11 h-11 rounded-lg glass flex items-center justify-center text-foreground"
             onClick={() => setOpen(!open)}
             aria-label="Menu"
+            aria-expanded={open}
           >
             <AnimatePresence mode="wait">
               {open ? (
@@ -78,7 +103,7 @@ const Navbar = () => {
 
         {/* Scroll progress indicator */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 h-[2px] origin-left bg-gradient-to-r from-primary via-primary/80 to-primary/40"
+          className="absolute bottom-0 left-0 right-0 h-[2px] origin-left bg-gradient-to-r from-accent via-primary to-primary/40"
           style={{ scaleX }}
         />
       </motion.nav>
@@ -91,7 +116,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-16 left-0 right-0 z-40 glass-strong px-6 py-6 md:hidden"
+            className="fixed top-[4.5rem] left-0 right-0 z-40 glass-strong px-6 py-6 md:hidden"
           >
             {links.map((l, i) => (
               <motion.a
@@ -101,7 +126,11 @@ const Navbar = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.05 }}
-                className="block py-3 text-lg font-display text-muted-foreground hover:text-primary transition-colors border-b border-border/30 last:border-0"
+                className={`block rounded-lg px-3 py-3 text-lg font-display transition-colors ${
+                  l.href === "#cv"
+                    ? "mb-2 bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:bg-muted/70 hover:text-primary"
+                }`}
               >
                 {l.label}
               </motion.a>

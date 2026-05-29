@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, Linkedin, MapPin, ArrowUpRight } from "lucide-react";
+import { Mail, Phone, Linkedin, MapPin, ArrowUpRight, FileText } from "lucide-react";
 
 const contacts = [
   {
@@ -49,10 +49,10 @@ const ContactSection = () => {
         >
           <p className="text-sm font-body tracking-[0.3em] uppercase text-primary mb-3">Contatti</p>
           <h2 className="text-4xl md:text-6xl font-display font-bold mb-4 text-foreground">
-            Facciamoci <span className="text-primary italic">sentire</span>
+            Parliamone <span className="text-primary italic">insieme</span>
           </h2>
           <p className="text-muted-foreground font-body max-w-md mx-auto text-lg">
-            Se hai un'idea, una domanda, o anche solo voglia di fare due chiacchiere sul web, scrivimi!
+            Se pensi che il mio profilo possa essere adatto a un ruolo o a un progetto, scrivimi pure.
           </p>
         </motion.div>
 
@@ -67,20 +67,31 @@ const ContactSection = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/30" />
           <div className="relative z-10">
             <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-4">
-              Ti va di costruire qualcosa insieme?
+              Vuoi capire se possiamo lavorare insieme?
             </h3>
             <p className="text-muted-foreground font-body mb-8 max-w-md mx-auto">
-              Che sia un progetto serio o un'idea folle, mi piace ascoltare. La mia inbox è sempre aperta.
+              Posso raccontarti meglio il mio percorso, oppure indirizzarti subito al CV più adatto.
             </p>
-            <motion.a
-              href="mailto:giacam2005@gmail.com"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-display font-bold rounded-xl text-lg hover:shadow-lg hover:shadow-primary/25 transition-shadow"
-            >
-              <Mail className="w-5 h-5" />
-              Scrivimi
-            </motion.a>
+            <div className="flex flex-wrap justify-center gap-3">
+              <motion.a
+                href="mailto:giacam2005@gmail.com"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-display font-bold rounded-xl text-base hover:shadow-lg hover:shadow-primary/25 transition-shadow"
+              >
+                <Mail className="w-5 h-5" />
+                Scrivimi
+              </motion.a>
+              <motion.a
+                href="#cv"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-border bg-background/40 text-foreground font-display font-bold rounded-xl text-base hover:bg-card transition-colors"
+              >
+                <FileText className="w-5 h-5" />
+                Vedi CV
+              </motion.a>
+            </div>
           </div>
         </motion.div>
 
