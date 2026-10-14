@@ -1,0 +1,85 @@
+/* Shared glass surfaces. Static, bounded backdrop filters; no extra JS,
+   animated blur, permanent will-change or nested backdrop layers. */
+:root {
+  --glass-fill: rgba(255, 253, 250, .56);
+  --glass-shine: rgba(255, 255, 255, .5);
+  --glass-border: rgba(139, 99, 115, .2);
+  --glass-edge: rgba(255, 255, 255, .85);
+  --glass-shadow: 0 12px 32px rgba(65, 30, 47, .055);
+  --glass-blur: 10px;
+}
+html[data-theme=dark] {
+  --glass-fill: rgba(29, 24, 33, .64);
+  --glass-shine: rgba(242, 222, 255, .065);
+  --glass-border: rgba(233, 214, 240, .18);
+  --glass-edge: rgba(255, 239, 255, .12);
+  --glass-shadow: 0 12px 32px rgba(0, 0, 0, .18);
+}
+
+.tilt-card .card-face,
+.tilt-card:hover .card-face,
+.float-badge {
+  border-color: var(--glass-border);
+  box-shadow: inset 0 1px 0 var(--glass-edge), var(--glass-shadow);
+}
+.tilt-card:hover .card-face {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--glass-border));
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .tilt-card .card-face, .profile-card {
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(115%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(115%);
+  }
+  .tilt-card .card-face, .float-badge {
+    background: linear-gradient(135deg, var(--glass-shine), transparent 48%), var(--glass-fill);
+  }
+  /* The hero keeps its dark tint so its pale typography stays readable. */
+  .profile-card {
+    background: linear-gradient(135deg, rgba(245, 219, 255, .1), transparent 55%), rgba(27, 22, 33, .88);
+    border-color: rgba(239, 221, 250, .3);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 16px 28px 55px rgba(37, 14, 43, .16);
+  }
+  html[data-theme=dark] .profile-card {
+    background: linear-gradient(135deg, rgba(245, 219, 255, .09), transparent 55%), rgba(27, 22, 33, .74);
+  }
+  /* Tint the mockup area without an opaque panel or a second filter. */
+  .project-art,
+  .project-art.artist,
+  .project-art.concept {
+    background: radial-gradient(ellipse at 80% 20%, rgba(139, 30, 63, .09), transparent 72%), rgba(229, 216, 225, .2);
+  }
+  html[data-theme=dark] .project-art,
+  html[data-theme=dark] .project-art.artist,
+  html[data-theme=dark] .project-art.concept {
+    background: radial-gradient(ellipse at 80% 20%, rgba(155, 121, 220, .12), transparent 72%), rgba(43, 30, 49, .16);
+  }
+}
+
+@media (max-width: 720px), (pointer: coarse) {
+  :root { --glass-blur: 6px; --glass-fill: rgba(255, 253, 250, .65); }
+  html[data-theme=dark] { --glass-fill: rgba(29, 24, 33, .74); }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .tilt-card .card-face, .float-badge {
+    background: var(--solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .profile-card, html[data-theme=dark] .profile-card {
+    background: #1b1621;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@media (forced-colors: active), print {
+  .tilt-card .card-face, .float-badge, .profile-card,
+  html[data-theme=dark] .profile-card {
+    background: Canvas;
+    border-color: CanvasText;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

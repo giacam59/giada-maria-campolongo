@@ -1,5 +1,7 @@
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
+import { createRoot, hydrateRoot } from 'react-dom/client';
+import App from './App';
+import './styles/index.css';
 
-createRoot(document.getElementById("root")!).render(<App />);
+const root = document.getElementById('root')!;
+if (root.hasChildNodes() && root.querySelector('main')) hydrateRoot(root, <App />);
+else createRoot(root).render(<App />);

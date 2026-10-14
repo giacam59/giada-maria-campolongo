@@ -1,0 +1,112 @@
+/* layout: styles preserved from the original portfolio. */
+
+
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: color-mix(in srgb,var(--bg) 86%,transparent);
+  border-bottom: 1px solid var(--line)
+}
+
+.header-inner {
+  height: var(--header);
+  display: flex;
+  align-items: center;
+  gap: 25px
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0
+}
+
+.wordmark-gm {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 29px;
+  letter-spacing: -2.5px
+}
+
+.wordmark-gm span {
+  color: var(--accent)
+}
+
+.wordmark-name {
+  font-size: 9px;
+  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  border-left: 1px solid var(--strong-line);
+  padding-left: 12px
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 21px;
+  margin-left: auto
+}
+
+.desktop-nav a {
+  font-size: 10px;
+  color: var(--muted);
+  padding: 12px 0;
+  white-space: nowrap
+}
+
+.desktop-nav a:hover,.desktop-nav a.active {
+  color: var(--accent)
+}
+
+.desktop-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform .25s
+}
+
+.desktop-nav a.active::after {
+  transform: scaleX(1)
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 9px
+}
+
+.lang-toggle {
+  font-family: var(--mono);
+  font-size: 10px;
+  width: 36px;
+  height: 40px
+}
+
+.theme-toggle {
+  border: 0;
+  width: 28px
+}
+
+.menu-button {
+  display: none
+}
+
+.mobile-nav {
+  display: none
+}
+
+.header-controls .icon {
+  width: 16px;
+  height: 16px
+}

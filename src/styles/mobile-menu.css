@@ -1,0 +1,54 @@
+/* Keep the panel mounted for reversible transitions; inert and aria-hidden
+   exclude the closed menu from keyboard and assistive navigation immediately. */
+:root { --menu-duration: 240ms; --menu-stagger: 30ms; }
+.hamburger { position: relative; display: block; width: 21px; height: 18px; }
+.hamburger > span {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 21px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transform-origin: center;
+  transition: transform var(--menu-duration) cubic-bezier(.22, 1, .36, 1), opacity var(--menu-duration) ease;
+}
+.hamburger > span:first-child { transform: translateY(-6px); }
+.hamburger > span:last-child { transform: translateY(6px); }
+.menu-button[aria-expanded=true] .hamburger > span:first-child { transform: rotate(45deg); }
+.menu-button[aria-expanded=true] .hamburger > span:nth-child(2) { transform: scaleX(.3); opacity: 0; }
+.menu-button[aria-expanded=true] .hamburger > span:last-child { transform: rotate(-45deg); }
+
+@media (max-width: 980px) {
+  .menu-button { min-width: 44px; min-height: 44px; }
+  .mobile-nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px);
+    overscroll-behavior: contain;
+    padding-bottom: calc(30px + env(safe-area-inset-bottom));
+    transition: opacity var(--menu-duration) ease, transform var(--menu-duration) cubic-bezier(.22, 1, .36, 1), visibility 0s var(--menu-duration);
+  }
+  .mobile-nav[data-open=true] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition-delay: 0s;
+  }
+  .mobile-nav a {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--menu-duration) ease, transform var(--menu-duration) cubic-bezier(.22, 1, .36, 1);
+  }
+  .mobile-nav[data-open=true] a {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--menu-index) * var(--menu-stagger));
+  }
+}
+html[data-reduced-motion=true] { --menu-duration: 0ms; --menu-stagger: 0ms; }
+@media (prefers-reduced-motion: reduce) {
+  :root { --menu-duration: 0ms; --menu-stagger: 0ms; }
+}

@@ -1,0 +1,47 @@
+{
+  "captured": "2026-10-08",
+  "portfolio": {
+    "source": "https://giada-maria-campolongo-portfolio.giacam2005.chatgpt.site/",
+    "method": "Browser viewport capture",
+    "captured": "2026-10-09",
+    "width": 1348,
+    "height": 926
+  },
+  "artist": {
+    "source": "https://micromihai.com/en",
+    "method": "Browser viewport capture"
+  },
+  "concept": {
+    "source": "https://giada-maria-campolongo.netlify.app/assets/project-algecopower-CUs3nQPB.png",
+    "website": "https://algecopower.netlify.app/",
+    "method": "Original project screenshot published on the author’s portfolio"
+  },
+  "algeco": {
+    "source": "User-supplied image(3).png",
+    "captured": "2026-10-09",
+    "method": "Built-in imagegen privacy edit: opaque sidebar redactions over municipalities and LCL identifiers. Lossless WebP full image and compressed preview. Replaces the prior overview.",
+    "width": 1740,
+    "height": 904
+  },
+  "algecoDetail": {
+    "source": "User-supplied image(2).png",
+    "captured": "2026-10-09",
+    "method": "Built-in imagegen privacy edit: opaque sidebar redactions over names, municipality/address rows and identifiers; lossless WebP full image and compressed preview. Unredacted input is not included in the project.",
+    "width": 1746,
+    "height": 901
+  },
+  "algecoRecords": {
+    "source": "User-supplied image(4).png",
+    "captured": "2026-10-09",
+    "method": "Built-in imagegen privacy edit: opaque redactions over names, complete addresses and municipalities, phone numbers, POD codes, populated notes, appointment dates and times. Lossless full image and compressed preview derive only from the censored PNG. Unredacted input is not included in the project.",
+    "width": 1742,
+    "height": 903
+  },
+  "algecoCalendar": {
+    "source": "User-supplied image(5).png",
+    "captured": "2026-10-09",
+    "method": "Built-in imagegen privacy edit: opaque redactions over names, phones, full addresses and municipalities, POD and ENELTEL values, operator and account names, dates, times, populated notes and linked record label. Both image variants derive solely from the censored PNG; unredacted input excluded.",
+    "width": 1742,
+    "height": 903
+  }
+}

@@ -1,0 +1,69 @@
+/* cards: styles preserved from the original portfolio. */
+
+
+.tilt-card {
+  perspective: 900px;
+  position: relative
+}
+
+.card-face {
+  height: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  border-radius: 12px;
+  position: relative;
+  transform: rotateX(var(--card-rx,0deg)) rotateY(var(--card-ry,0deg));
+  transition: transform .35s ease,border-color .35s,box-shadow .35s;
+  overflow: hidden
+}
+
+.tilt-card:hover .card-face {
+  border-color: color-mix(in srgb,var(--accent) 36%,transparent);
+  box-shadow: var(--shadow-x,0px) 18px 40px #8b1e3f14,0 0 0 1px #8b1e3f05
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 17px;
+  position: relative
+}
+
+.skill-card .card-face {
+  padding: 27px 23px
+}
+
+.skill-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px
+}
+
+.skill-icon {
+  width: 39px;
+  height: 39px;
+  background: var(--beige);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  border-radius: 9px
+}
+
+.skill-number {
+  font: 9px var(--mono);
+  color: var(--muted)
+}
+
+.skill-card h3 {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.3px;
+  margin-bottom: 19px
+}
+
+.skill-card .tag {
+  font-size: 9px;
+  padding: 5px 7px
+}
