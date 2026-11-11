@@ -1,20 +1,20 @@
 # Giada Maria Campolongo — Portfolio
 
 Portfolio personale realizzato con **React 18**, **TypeScript** e **Vite** (v2.0.0).
-Un solo albero React prerenderizzato in HTML statico e idratato lato client,
+Un solo albero React prerenderizzato in HTML statico,
 con dati tipizzati, CSS modulare, supporto bilingue **IT/EN**, tema **chiaro/scuro**,
-gestione delle preferenze di movimento e schermate reali ispezionabili.
+gestione delle preferenze di movimento e schermate ispezionabili.
 
 **Sito online:** https://giada-maria-campolongo.netlify.app/
 
 ## Caratteristiche principali
 
-- **Prerendering statico + idratazione**: `pnpm build` genera l’HTML completo di tutte le sezioni prima del caricamento JavaScript e lo rende interattivo con `hydrateRoot`.
+- **Prerendering statico e interattività client**: `pnpm build` genera l’HTML completo di tutte le sezioni prima del caricamento JavaScript e lo rende interattivo con `hydrateRoot`.
 - **Contenuti tipizzati in locale**: profilo, competenze, esperienze, case study gestionale, progetti, formazione e CV sono separati dai componenti UI e verificati tramite TypeScript.
 - **Bilingue e temi**: cambio lingua (`it` / `en`), tema (`light` / `dark`) e riduzione animazioni (`full` / `reduce`) persistenti in `localStorage`, rispettando `prefers-reduced-motion`.
 - **Accessibilità e focus**: link *Vai al contenuto*, menu mobile con gestione di `inert`, `aria-hidden` e trap del focus da tastiera, modali su `<dialog>` nativo (`showModal()`), blocco scroll condiviso con conteggio dei riferimenti.
 - **Nessuna dipendenza JS da CDN e nessun runtime Tailwind**: stili scritti in CSS modulare (`src/styles/`), bundle locale completo e budget verificato automaticamente a ogni build.
-- **Galleria del gestionale con oscuramento dati**: 4 schermate reali censurate nei pixel sia nelle anteprime sia nei file a piena risoluzione, senza originali non censurati nel repository.
+- **Galleria del gestionale con oscuramento dati**: 4 schermate dell’applicazione con dati sensibili oscurati nei pixel sia nelle anteprime sia nei file a piena risoluzione, senza originali non censurati nel repository.
 
 ## Requisiti e avvio
 
@@ -33,7 +33,7 @@ Altri comandi disponibili:
 
 ```sh
 pnpm typecheck   # Controllo statico TypeScript (tsc --noEmit)
-pnpm test        # Suite Vitest + Testing Library (11 test)
+pnpm test        # Suite Vitest + Testing Library (12 test)
 pnpm build       # Typecheck, build client + SSR, prerendering e verifica output
 pnpm preview     # Anteprima locale della build in dist/
 ```
@@ -89,7 +89,7 @@ I pulsanti nella sezione Contatti avviano il download diretto. Per aggiornarli, 
 La suite automatica copre due livelli:
 
 1. **Test (`pnpm test`)** in [`src/test/`](src/test/):
-   - `App.test.tsx` (6 test): accessibilità e gestione focus/scroll del menu mobile, cambio lingua IT/EN e tema chiaro/scuro con persistenza `localStorage`, apertura modali screenshot a piena risoluzione e navigazione di tutte e 4 le slide del gestionale, link ai progetti, link di download dei 2 CV e debounce di `scrollActivity`.
+   - `App.test.tsx` (7 test): accessibilità e gestione focus/scroll del menu mobile, cambio lingua IT/EN e tema chiaro/scuro con persistenza `localStorage`, apertura modali screenshot a piena risoluzione e navigazione di tutte e 4 le slide del gestionale, stabilità della didascalia durante lo scroll fluido, link ai progetti, link GitHub, link di download dei 2 CV e debounce di `scrollActivity`.
    - `Effects.test.tsx` (2 test): animazione particelle e pausa/ripresa su `visibilitychange`; blocco e ripristino di Lenis con overlay e ancore.
    - `Loader.test.tsx` (3 test): chiusura automatica senza dipendere da `sessionStorage`, chiusura con `Escape` e singola esecuzione per sessione, rispetto di `prefers-reduced-motion`.
 2. **Verifica statica post-build (`pnpm build` → [`scripts/verify-build.mjs`](scripts/verify-build.mjs))**:
@@ -99,7 +99,7 @@ La suite automatica copre due livelli:
    - Presenza e integrità dei due PDF in `dist/cv/` rispetto a `public/cv/`.
    - Budget di peso: HTML `< 100 kB` e totale chunk JS `< 160 kB` gzip.
 
-I test girano in ambiente `jsdom` e non misurano gli FPS effettivi: per valutare la fluidità grafica resta necessaria una verifica su browser e dispositivo reale.
+I test girano in ambiente `jsdom` e non misurano gli FPS effettivi: per valutare la fluidità grafica resta necessaria una verifica diretta su browser e dispositivo.
 
 ## Pubblicazione
 
@@ -107,7 +107,7 @@ I test girano in ambiente `jsdom` e non misurano gli FPS effettivi: per valutare
 
 ## Galleria del gestionale
 
-La sezione Case Study integra [`CaseStudyGallery.tsx`](src/components/sections/CaseStudyGallery.tsx) con quattro schermate reali del gestionale sviluppato per Algeco Power. La navigazione supporta frecce, indicatori, tasti direzionali (`ArrowLeft`/`ArrowRight`) e swipe nativo con CSS scroll snap, senza autoplay né loop JavaScript. Ogni slide usa un’anteprima WebP compressa nel carosello e apre nella modale la corrispondente immagine WebP a piena risoluzione:
+La sezione Case Study integra [`CaseStudyGallery.tsx`](src/components/sections/CaseStudyGallery.tsx) con quattro schermate del gestionale sviluppato per Algeco Power. La navigazione supporta frecce, indicatori, tasti direzionali (`ArrowLeft`/`ArrowRight`) e swipe nativo con CSS scroll snap, senza autoplay né loop JavaScript. Ogni slide usa un’anteprima WebP compressa nel carosello e apre nella modale la corrispondente immagine WebP a piena risoluzione:
 
 1. **Panoramica delle zone e degli appuntamenti** (`algeco`): vista d’insieme della mappa e degli appuntamenti, con comuni e identificativi oscurati nella sidebar.
 2. **Pianificazione degli interventi** (`algecoDetail`): dettaglio operativo sulla mappa, con nominativi, comuni e identificativi oscurati nella sidebar.

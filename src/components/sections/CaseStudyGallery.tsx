@@ -14,18 +14,44 @@ export function CaseStudyGallery({ onImage }: { onImage: (key: MediaKey) => void
   const [active, setActive] = useState(0);
   const viewport = useRef<HTMLDivElement>(null);
   const frame = useRef(0);
-  useEffect(() => () => cancelAnimationFrame(frame.current), []);
+  const lockedTarget = useRef<number | null>(null);
+  const unlockTimer = useRef<ReturnType<typeof setTimeout>>();
+  useEffect(() => () => {
+    cancelAnimationFrame(frame.current);
+    clearTimeout(unlockTimer.current);
+  }, []);
+  function unlock() {
+    lockedTarget.current = null;
+    clearTimeout(unlockTimer.current);
+  }
   function select(index: number) {
     const next = (index + slides.length) % slides.length;
     setActive(next);
-    viewport.current?.scrollTo({ left: next * viewport.current.clientWidth, behavior: reducedMotion ? 'instant' : 'smooth' });
+    cancelAnimationFrame(frame.current);
+    frame.current = 0;
+    const element = viewport.current;
+    if (!element) return;
+    if (reducedMotion || !element.clientWidth) {
+      unlock();
+      element.scrollTo({ left: next * element.clientWidth, behavior: reducedMotion ? 'instant' : 'smooth' });
+      return;
+    }
+    lockedTarget.current = next;
+    clearTimeout(unlockTimer.current);
+    unlockTimer.current = setTimeout(unlock, 900);
+    element.scrollTo({ left: next * element.clientWidth, behavior: 'smooth' });
   }
   function trackScroll() {
     if (frame.current) return;
     frame.current = requestAnimationFrame(() => {
       frame.current = 0;
       const element = viewport.current;
-      if (element && element.clientWidth) setActive(Math.max(0, Math.min(slides.length - 1, Math.round(element.scrollLeft / element.clientWidth))));
+      if (!element || !element.clientWidth) return;
+      if (lockedTarget.current !== null) {
+        if (Math.abs(element.scrollLeft - lockedTarget.current * element.clientWidth) <= 2) unlock();
+        return;
+      }
+      setActive(Math.max(0, Math.min(slides.length - 1, Math.round(element.scrollLeft / element.clientWidth))));
     });
   }
   return <figure className="case-figure case-gallery" aria-label={copy.galleryLabel} aria-roledescription={copy.galleryRole} onKeyDown={event => {
@@ -33,7 +59,7 @@ export function CaseStudyGallery({ onImage }: { onImage: (key: MediaKey) => void
   }}>
     <div className="gallery-frame">
       <div className="capture-bar"><WindowDots /><span>{copy.realScreen}</span><span aria-hidden="true">{active + 1} / {slides.length}</span></div>
-      <div className="gallery-viewport" ref={viewport} onScroll={trackScroll} data-lenis-prevent="true">
+      <div className="gallery-viewport" ref={viewport} onScroll={trackScroll} onPointerDown={unlock} onTouchStart={unlock} onWheel={unlock} data-lenis-prevent="true">
         {slides.map((key, index) => <div className="gallery-slide" key={key} role="group" aria-roledescription={copy.slideRole} aria-label={`${index + 1} / ${slides.length}`} aria-hidden={active !== index}>
           <button className="case-image-trigger" type="button" tabIndex={active === index ? 0 : -1} onClick={() => onImage(key)} aria-label={`${copy.imageOpen} — ${localize(media[key].label)}`} aria-haspopup="dialog">
             <Screenshot mediaKey={key} />

@@ -13,7 +13,7 @@ export function Hero() {
     <div className="hero-grid">
       <div className="hero-copy">
         <p className="eyebrow">{copy.eyebrow}</p>
-        <h1 id="hero-title">Giada Maria<br /><em>Campolongo<span>.</span></em></h1>
+        <h1 id="hero-title">Giada Maria<br /><em>Campolongo</em></h1>
         <p className="hero-role">{copy.role}</p>
         <p className="hero-description">{copy.profile}</p>
         <div className="hero-actions"><a className="btn btn-primary" href="#progetti">{copy.viewWork}<Icon name="arrow" small /></a><a className="text-link" href="#contatti">{copy.talk}<Icon name="right" small /></a></div>

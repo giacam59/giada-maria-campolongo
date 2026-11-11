@@ -56,6 +56,7 @@ html[data-scrolling=true] .scroll-link .icon { animation-play-state: paused; }
 .diagram-arrow { fill: #cb8fa6; stroke: none; }
 .language-b2 { --level: 68%; }
 .language-track:not(.language-b2) { --level: 100%; }
+.contact-socials { flex-wrap: wrap; }
 .contact-portfolio { font-size: 10px; }
 .contact-item a { overflow-wrap: anywhere; }
 .dialog-content { position: relative; }

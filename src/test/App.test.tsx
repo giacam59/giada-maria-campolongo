@@ -2,6 +2,8 @@ import { describe, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
+import { CaseStudyGallery } from '../components/sections/CaseStudyGallery';
+import { PreferencesProvider } from '../context/PreferencesContext';
 import { subscribeToScrollActivity } from '../lib/scrollActivity';
 
 describe('Portfolio interactions', () => {
@@ -116,7 +118,35 @@ describe('Portfolio interactions', () => {
       expect(link.getAttribute('href')).toBe(path);
       expect(link.hasAttribute('download')).toBe(true);
     }
+    expect(screen.getByRole('link', { name: 'GitHub · giacam59' }).getAttribute('href')).toBe('https://github.com/giacam59');
     expect(screen.queryByText('Download CV: PDF da collegare.')).toBeNull();
+  });
+
+  it('keeps the selected gallery caption stable while smooth-scrolling', async () => {
+    vi.spyOn(window, 'matchMedia').mockImplementation(query => ({
+      matches: false, media: query, onchange: null,
+      addEventListener: vi.fn(), removeEventListener: vi.fn(), addListener: vi.fn(), removeListener: vi.fn(), dispatchEvent: vi.fn(),
+    }));
+    const scrollTo = vi.fn();
+    Object.defineProperty(HTMLElement.prototype, 'scrollTo', { configurable: true, value: scrollTo });
+    const user = userEvent.setup();
+    render(<PreferencesProvider><CaseStudyGallery onImage={vi.fn()} /></PreferencesProvider>);
+    const viewport = document.querySelector('.gallery-viewport') as HTMLDivElement;
+    Object.defineProperty(viewport, 'clientWidth', { configurable: true, value: 600 });
+    await user.click(screen.getByRole('button', { name: 'Schermata successiva' }));
+    expect(screen.getByText('Pianificazione e dettaglio degli interventi tecnici sul territorio.')).toBeTruthy();
+    Object.defineProperty(viewport, 'scrollLeft', { configurable: true, value: 40 });
+    fireEvent.scroll(viewport);
+    await act(async () => { await new Promise(resolve => requestAnimationFrame(resolve)); });
+    expect(screen.getByText('Pianificazione e dettaglio degli interventi tecnici sul territorio.')).toBeTruthy();
+    expect(screen.queryByText('Panoramica delle zone e degli appuntamenti sulla mappa.')).toBeNull();
+    Object.defineProperty(viewport, 'scrollLeft', { configurable: true, value: 600 });
+    fireEvent.scroll(viewport);
+    await act(async () => { await new Promise(resolve => requestAnimationFrame(resolve)); });
+    Object.defineProperty(viewport, 'scrollLeft', { configurable: true, value: 1200 });
+    fireEvent.scroll(viewport);
+    await act(async () => { await new Promise(resolve => requestAnimationFrame(resolve)); });
+    expect(screen.getByText('Gestione delle schede contatti e degli appuntamenti.')).toBeTruthy();
   });
 });
 

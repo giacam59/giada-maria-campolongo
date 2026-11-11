@@ -5,6 +5,7 @@ export const person = {
   "phoneURI": "+393519417402",
   "birth": "24/08/2005",
   "linkedin": "gmcampolongo",
+  "github": "giacam59",
   "portfolio": "giada-maria-campolongo"
 };
 

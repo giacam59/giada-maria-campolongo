@@ -19,4 +19,5 @@
 .case-gallery figcaption { margin-top: 8px; min-height: 5.25em; }
 .gallery-caption, .gallery-hint { display: block; }
 .gallery-hint { margin-top: 3px; color: #c5b5c0; }
+@media (max-width: 720px) { .gallery-caption { min-height: 3.5em; } }
 @media (prefers-reduced-motion: reduce) { .gallery-dot span { transition: none; } }
