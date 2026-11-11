@@ -105,7 +105,7 @@ describe('Portfolio interactions', () => {
     const user = userEvent.setup();
     render(<App />);
     expect(screen.getAllByRole('link', { name: 'Apri il sito' }).map(link => link.getAttribute('href'))).toEqual([
-      'https://giada-maria-campolongo-portfolio.giacam2005.chatgpt.site/', 'https://micromihai.com/en', 'https://algecopower.netlify.app/',
+      'https://giada-maria-campolongo.netlify.app/', 'https://micromihai.com/en', 'https://algecopower.netlify.app/',
     ]);
     await user.click(screen.getAllByRole('button', { name: 'Come l’ho realizzato' })[0]);
     const dialog = await screen.findByRole('dialog');

@@ -21,7 +21,7 @@ export const projects: Project[] = [
       "React 18",
       "TypeScript",
       "Vite",
-      "Tailwind CSS"
+      "CSS modulare"
     ],
     "details": {
       "it": [
@@ -36,7 +36,7 @@ export const projects: Project[] = [
       ]
     },
     "imageKey": "portfolio",
-    "url": "https://giada-maria-campolongo-portfolio.giacam2005.chatgpt.site/"
+    "url": "https://giada-maria-campolongo.netlify.app/"
   },
   {
     "id": "artist",

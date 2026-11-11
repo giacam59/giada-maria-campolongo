@@ -49,6 +49,7 @@ const it = {
     "mappe interattive": "mappe interattive",
     "animazioni": "animazioni",
     "Automazione": "Automazione",
+    "CSS modulare": "CSS modulare",
     "Excel avanzato (pivot, formule complesse)": "Excel avanzato (pivot, formule complesse)"
   },
   "expLabel": "02 / Esperienze",

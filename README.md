@@ -5,6 +5,8 @@ Un solo albero React prerenderizzato in HTML statico e idratato lato client,
 con dati tipizzati, CSS modulare, supporto bilingue **IT/EN**, tema **chiaro/scuro**,
 gestione delle preferenze di movimento e schermate reali ispezionabili.
 
+**Sito online:** https://giada-maria-campolongo.netlify.app/
+
 ## Caratteristiche principali
 
 - **Prerendering statico + idratazione**: `pnpm build` genera l’HTML completo di tutte le sezioni prima del caricamento JavaScript e lo rende interattivo con `hydrateRoot`.
