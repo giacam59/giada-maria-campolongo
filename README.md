@@ -1,12 +1,25 @@
 # Giada Maria Campolongo — Portfolio
 
-Progetto React 18 + TypeScript + Vite. Un solo albero React, componenti reali,
-contenuti tipizzati e stili separati. Italiano e inglese, tema chiaro/scuro,
-preferenze di movimento, schermate reali ingrandibili e layout responsive.
+Portfolio personale realizzato con **React 18**, **TypeScript** e **Vite** (v2.0.0).
+Un solo albero React prerenderizzato in HTML statico e idratato lato client,
+con dati tipizzati, CSS modulare, supporto bilingue **IT/EN**, tema **chiaro/scuro**,
+gestione delle preferenze di movimento e schermate reali ispezionabili.
 
-## Avvio
+## Caratteristiche principali
 
-Requisiti: Node.js 22.12 o successivo e pnpm 11.25.0.
+- **Prerendering statico + idratazione**: `pnpm build` genera l’HTML completo di tutte le sezioni prima del caricamento JavaScript e lo rende interattivo con `hydrateRoot`.
+- **Contenuti tipizzati in locale**: profilo, competenze, esperienze, case study gestionale, progetti, formazione e CV sono separati dai componenti UI e verificati tramite TypeScript.
+- **Bilingue e temi**: cambio lingua (`it` / `en`), tema (`light` / `dark`) e riduzione animazioni (`full` / `reduce`) persistenti in `localStorage`, rispettando `prefers-reduced-motion`.
+- **Accessibilità e focus**: link *Vai al contenuto*, menu mobile con gestione di `inert`, `aria-hidden` e trap del focus da tastiera, modali su `<dialog>` nativo (`showModal()`), blocco scroll condiviso con conteggio dei riferimenti.
+- **Nessuna dipendenza JS da CDN e nessun runtime Tailwind**: stili scritti in CSS modulare (`src/styles/`), bundle locale completo e budget verificato automaticamente a ogni build.
+- **Galleria del gestionale con oscuramento dati**: 4 schermate reali censurate nei pixel sia nelle anteprime sia nei file a piena risoluzione, senza originali non censurati nel repository.
+
+## Requisiti e avvio
+
+Requisiti (dichiarati in [`package.json`](package.json)):
+
+- **Node.js** `>= 22.12.0`
+- **pnpm** `11.25.0` (gestibile tramite Corepack)
 
 ```sh
 corepack enable
@@ -14,123 +27,89 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
+Altri comandi disponibili:
+
 ```sh
-pnpm typecheck
-pnpm test
-pnpm build
-pnpm preview
+pnpm typecheck   # Controllo statico TypeScript (tsc --noEmit)
+pnpm test        # Suite Vitest + Testing Library (11 test)
+pnpm build       # Typecheck, build client + SSR, prerendering e verifica output
+pnpm preview     # Anteprima locale della build in dist/
 ```
 
-`pnpm build` genera `dist/`, pronta per hosting statico. La build prerenderizza
-le sezioni con React: il testo è già nell’HTML prima del caricamento JavaScript.
-Il browser lo rende interattivo con `hydrateRoot`. Nessun server applicativo è
-necessario in produzione. `index.html` è solo il punto di ingresso di Vite.
+`pnpm build` produce `dist/`, pronta per qualsiasi hosting statico senza server applicativo in produzione. [`index.html`](index.html) funge da template di ingresso per Vite: contiene i metadati SEO/OpenGraph/JSON-LD, i Google Fonts, la favicon SVG inline e il segnaposto `<!--app-html-->` sostituito durante il prerendering.
 
-## Organizzazione
+## Organizzazione del repository
 
-- `src/components/sections/`: Hero, Skills, Experience, CaseStudy, Projects,
-  Education e Contact; CaseStudyGallery e ProjectPreview e ArchitectureDiagram sono riutilizzabili.
-- `src/components/layout/`: Header e Footer.
-- `src/components/ui/`: icone, card, tag, screenshot e animazioni di ingresso.
-- `src/components/dialogs/`: modale caricata solo alla prima apertura.
-- `src/components/effects/`: introduzione GM, sfondo decorativo, spotlight e scroll morbido.
-- `src/hooks/`: preferenze media, blocco scroll, navigazione, timeline e tilt.
-- `src/context/`: preferenze condivise, senza stato aggiornato ad ogni scroll.
-- `src/content/`: dati del portfolio e traduzioni IT/EN.
-- `src/assets/`: immagini reali, servite con nomi versionati da Vite.
-- `src/styles/`: CSS organizzato per area; `performance.css` raccoglie le
-  regole che limitano il lavoro grafico durante lo scroll.
-- `src/test/`: test delle interazioni e della gestione degli eventi scroll.
-- `source-assets/`: schermate censurate e provenienza delle immagini.
+- [`src/App.tsx`](src/App.tsx), [`src/main.tsx`](src/main.tsx), [`src/entry-server.tsx`](src/entry-server.tsx): albero principale React (`LazyMotion` + `PreferencesProvider` + `DetailDialog` caricata in lazy loading), ingresso client (`hydrateRoot` / `createRoot`) e punto di ingresso SSR (`renderToString`).
+- [`src/components/sections/`](src/components/sections/): `Hero`, `Skills`, `Experience`, `CaseStudy`, `Projects`, `Education` e `Contact`; più i componenti riutilizzabili `CaseStudyGallery`, `ProjectPreview` e `ArchitectureDiagram`.
+- [`src/components/layout/`](src/components/layout/): `Header` (navigazione desktop e drawer mobile) e `Footer` (informativa privacy, controllo animazioni, ritorno in alto).
+- [`src/components/ui/`](src/components/ui/): `Card`, `Icon`, `Reveal`, `Screenshot`, `SectionHeading`, `Tags`, `WindowDots`.
+- [`src/components/dialogs/`](src/components/dialogs/): `DetailDialog`, caricata su richiesta alla prima apertura di un’immagine ingrandita, di una scheda progetto o dell’informativa privacy.
+- [`src/components/effects/`](src/components/effects/): `Loader` (introduzione decorativa GM), `AmbientBackground` (sfere radiali e canvas particellare), `CursorSpotlight` e `SmoothScroll` (Lenis).
+- [`src/hooks/`](src/hooks/): `useActiveSection`, `useBodyLock`, `useMediaQuery`, `usePointerTilt`, `useTimeline`.
+- [`src/context/`](src/context/): `PreferencesContext` per lingua, tema e movimento (nessuno stato aggiornato ad ogni evento scroll).
+- [`src/lib/`](src/lib/): `motionFeatures` (chunk separato `domAnimation` di Framer Motion), `preferences` (`localStorage`) e `scrollActivity` (rilevamento inizio/fine scroll con debounce).
+- [`src/content/`](src/content/): dati del portfolio (`index.ts`, `person.ts`, `projects.ts`, `experiences.ts`, `skills.ts`, `education.ts`, `media.ts`, `translations.ts`) e dizionari UI in [`locales/it.ts`](src/content/locales/it.ts) e [`locales/en.ts`](src/content/locales/en.ts).
+- [`src/types/content.ts`](src/types/content.ts): definizioni TypeScript condivise (`Project`, `Experience`, `SkillGroup`, `EducationItem`, `ScreenshotMedia`, `DialogContent`, `Locale`, `Localized`, `MediaKey`).
+- [`src/assets/`](src/assets/): immagini dei progetti e del gestionale (anteprime WebP e versioni a piena risoluzione), servite con hash da Vite.
+- [`src/styles/`](src/styles/): fogli CSS modulari organizzati per area (`index.css`, `base.css`, `effects.css`, `layout.css`, `hero.css`, `cards.css`, `sections.css`, `responsive.css`, `performance.css`, `readability.css`, `gallery.css`, `glass.css`, `mobile-menu.css`).
+- [`src/test/`](src/test/): test unitari e di integrazione (`App.test.tsx`, `Effects.test.tsx`, `Loader.test.tsx`, `setup.ts`).
+- [`scripts/`](scripts/): `prerender.mjs` (inietta l’HTML renderizzato in `dist/index.html` e rimuove `.prerender/`) e `verify-build.mjs` (controlli automatici sull’output finale).
+- [`public/cv/`](public/cv/): copie PDF dei due curriculum (`Giada-Maria-Campolongo-CV-Sviluppo.pdf` e `Giada-Maria-Campolongo-CV-Ufficio.pdf`).
+- [`source-assets/`](source-assets/): PNG sorgenti già censurati del gestionale e registro di provenienza [`provenance.json`](source-assets/provenance.json).
+- [`docs/content-management.md`](docs/content-management.md): guida ai contenuti locali tipizzati ed esempi per eventuali integrazioni CMS esterne.
 
 ## Aggiornare il portfolio
 
-Modifica progetti, esperienze, competenze e formazione nei rispettivi file in
-`src/content/`. Le stringhe dell’interfaccia sono in `src/content/locales/it.ts`
-e `en.ts`. I tipi in `src/types/content.ts` aiutano a trovare campi mancanti.
+Per aggiornare progetti, esperienze, competenze, formazione, dati personali o screenshot, modifica i rispettivi moduli in [`src/content/`](src/content/). Le stringhe dell’interfaccia sono raccolte in [`src/content/locales/it.ts`](src/content/locales/it.ts) e [`src/content/locales/en.ts`](src/content/locales/en.ts), con controllo dei campi garantito da [`src/types/content.ts`](src/types/content.ts). Ulteriori dettagli sono in [`docs/content-management.md`](docs/content-management.md).
 
-I due curriculum originali in italiano sono pubblicati in `public/cv/`:
-`Giada-Maria-Campolongo-CV-Sviluppo.pdf` e
-`Giada-Maria-Campolongo-CV-Ufficio.pdf`. I pulsanti in Contatti avviano il download.
-Per aggiornarli, sostituisci i PDF mantenendo i nomi oppure modifica i percorsi in
-`src/content/person.ts`. La build verifica presenza, formato e integrità delle
-copie pubblicate. Il profilo resta unico, con due CV disponibili.
+I due curriculum originali in italiano sono pubblicati in [`public/cv/`](public/cv/):
 
-## Scelte per lo scroll
+- `public/cv/Giada-Maria-Campolongo-CV-Sviluppo.pdf`
+- `public/cv/Giada-Maria-Campolongo-CV-Ufficio.pdf`
 
-I contenuti sono prerenderizzati e non attendono l’introduzione GM. L’introduzione
-appare una volta per sessione, con dissolvenza CSS indipendente dopo 1,05 secondi,
-timer React di sicurezza a 1,4 secondi. Mostra solo GM e la linea animata,
-senza pulsanti o link. Non blocca lo scroll
-e si chiude anche con Escape o quando la pagina viene nascosta. È assente dall’HTML
-statico e viene disattivata con movimento ridotto.
+I pulsanti nella sezione Contatti avviano il download diretto. Per aggiornarli, sostituisci i PDF mantenendo i nomi oppure aggiorna i percorsi in [`src/content/person.ts`](src/content/person.ts). La build verifica automaticamente presenza, intestazione `%PDF-` e identità dei file pubblicati rispetto a `public/cv/`.
 
-- Nessun `getBoundingClientRect` nel listener scroll; navigazione e timeline
-  usano IntersectionObserver. La barra di progresso usa CSS scroll timelines
-  nei browser compatibili e viene omessa negli altri.
-- Sfocatura d’ingresso soltanto su titoli e brevi introduzioni: 4px per 400ms
-  su desktop, 4px per 460ms su touch/mobile. Parte quando almeno l’8% del blocco
-  entra nella zona visibile, con un margine inferiore di 24px. Si esegue una sola volta tramite
-  Web Animations API e si rimuove al termine; è disattivata con movimento ridotto.
-  Nessun blur animato sull’intera sezione, sulle immagini o sulle card complete.
-  L’header usa un backdrop-filter statico di 14px (12px su mobile), limitato
-  a uno pseudo-elemento alto quanto la barra: non influenza il menu fisso.
-- Le card usano fondi traslucidi, riflessi statici e bordi luminosi in
-  `src/styles/glass.css`. Il backdrop blur è limitato alla superficie delle
-  card: 10px desktop, 6px touch/mobile, senza filtri annidati o nuovi listener.
-  Testi e immagini restano nitidi. Fallback opaco senza supporto backdrop,
-  con trasparenza ridotta, contrasto maggiore, colori forzati e stampa.
-- Le animazioni di ingresso si eseguono una volta, usando opacity e transform.
-  Le funzionalità Framer Motion sono caricate in un chunk separato.
-- Particelle a 24 fps su touch/mobile (20 durante lo scroll) e 30 fps su desktop.
-  Movimento di 12–22 px/s indipendente dagli FPS, attivo lungo tutta la pagina;
-  sospeso solo quando nascosta o con movimento ridotto.
-  Tre gradienti si muovono lentamente sullo sfondo anche su mobile, usando
-  solo trasformazioni e senza filtri blur; si fermano quando la pagina non è
-  visibile, rispettando le preferenze di movimento.
-- Collegamenti delle particelle in O(n), invece del precedente confronto O(n²).
-- Tilt limitato al mouse: una misura all’ingresso e un aggiornamento per frame.
-- Spotlight da 600px e anello sul mouse: texture radiale statica spostata via
-  transform, al massimo un aggiornamento per frame, senza filtri. Cursore nativo
-  mantenuto; effetto assente su touch e con movimento ridotto.
-- Lenis ammorbidisce mouse/trackpad con `wheelMultiplier: 0.75` e `lerp: 0.075`.
-  Scroll del documento reale; touch con inerzia nativa. Le ancore restano attive,
-  menu/modali fermano lo scroll della pagina. Disabilitato con movimento ridotto.
-- Screenshot lazy, cacheabili e con dimensioni dichiarate. La mappa usa
-  un’anteprima leggera; l’originale lossless si carica aprendo la modale.
-- Nessun runtime Tailwind nel browser e nessuna dipendenza JavaScript da CDN.
+## Scelte tecniche e performance nello scroll
 
-I font sono richiesti a Google Fonts con `display=swap`. Le altre dipendenze
-sono compilate localmente. L’informativa descrive questi comportamenti.
+- **Introduzione decorativa non bloccante** ([`Loader.tsx`](src/components/effects/Loader.tsx), [`performance.css`](src/styles/performance.css)): appare una sola volta per sessione (`sessionStorage`), avvia la dissolvenza CSS dopo `1,05 s` (`250 ms`) con timer React di sicurezza a `1,4 s`, non blocca lo scroll (`pointer-events: none`) e si chiude con `Escape`, `visibilitychange` o `pageshow`. È assente dall’HTML prerenderizzato e disabilitata con movimento ridotto.
+- **Osservazione senza lettura continua del layout**: nessuna chiamata a `getBoundingClientRect` nei listener di scroll. [`useActiveSection.ts`](src/hooks/useActiveSection.ts) e [`useTimeline.ts`](src/hooks/useTimeline.ts) usano `IntersectionObserver`; [`scrollActivity.ts`](src/lib/scrollActivity.ts) notifica solo inizio e fine scroll (debounce `160 ms`). La barra di avanzamento `#scroll-progress` utilizza `animation-timeline: scroll(root)` nei browser compatibili tramite `@supports`.
+- **Sfocatura d’ingresso mirata** ([`Reveal.tsx`](src/components/ui/Reveal.tsx)): animazione locale (`blur(4px)` → `0`) tramite Web Animations API applicata al più a tre elementi testuali (`h2`, `h3`, `.section-intro`, `.project-copy > p`), per `400 ms` su desktop e `460 ms` su viewport/puntatore compatti, attivata una sola volta (`threshold: 0.08`, `rootMargin: '0px 0px -24px 0px'`) e annullata al termine. Disattivata con movimento ridotto. Nessun blur animato su intere sezioni, card complete o immagini.
+- **Superfici glass statiche** ([`readability.css`](src/styles/readability.css), [`glass.css`](src/styles/glass.css)): l’header applica un `backdrop-filter` statico di `14px` (`12px` su mobile) al solo pseudo-elemento `#site-header::before` per non interferire con il menu fisso mobile. Le card limitano il blur a `10px` su desktop e `6px` su touch/mobile, con fallback opachi per browser privi di supporto, `prefers-reduced-transparency`, `prefers-contrast`, `forced-colors` e stampa.
+- **Framer Motion in chunk separato**: [`Reveal.tsx`](src/components/ui/Reveal.tsx) usa `m.div` animando `opacity` e `transform` (`y`), con feature `domAnimation` caricate dinamicamente via `LazyMotion`.
+- **Sfondo particellare e gradienti** ([`AmbientBackground.tsx`](src/components/effects/AmbientBackground.tsx)): `90` particelle su desktop (`45` su dispositivi touch/compatti), limitate a `30 fps` su desktop e `24 fps` su mobile (`20 fps` durante lo scroll), con velocità indipendente dal framerate (`12–22 px/s`) e collegamenti calcolati su un vicinato fisso di 3 particelle (`O(n)`). Tre orb radiali si muovono tramite sole trasformazioni `translate3d`/`scale`. Tutto si sospende quando la scheda è nascosta o con movimento ridotto.
+- **Tilt e spotlight solo per puntatore fine** ([`usePointerTilt.ts`](src/hooks/usePointerTilt.ts), [`CursorSpotlight.tsx`](src/components/effects/CursorSpotlight.tsx)): il tilt misura il rettangolo all’ingresso del puntatore mouse e aggiorna le variabili CSS al più una volta per frame; lo spotlight (`600 px` + anello `28 px`) sposta una texture statica via `translate3d` mantenendo il cursore nativo. Entrambi sono disattivati su touch, durante lo scroll (il tilt) e con movimento ridotto.
+- **Scroll fluido Lenis** ([`SmoothScroll.tsx`](src/components/effects/SmoothScroll.tsx)): attivo su mouse/trackpad (`wheelMultiplier: 0.75`, `lerp: 0.075`, `syncTouch: false`) lasciando al touch l’inerzia nativa; gestisce i collegamenti ad ancora, si ferma quando la pagina è nascosta o quando menu/modali bloccano il `body`, ed è disabilitato con movimento ridotto.
+- **Immagini e font**: [`Screenshot.tsx`](src/components/ui/Screenshot.tsx) dichiara `width` e `height` e usa `loading="lazy"` in pagina (`"eager"` nella modale). Le quattro schermate del gestionale mostrano anteprime WebP leggere nella galleria e caricano le versioni WebP a piena risoluzione all’apertura della modale. I font (`Inter`, `JetBrains Mono`, `Playfair Display`) sono richiesti a Google Fonts con `display=swap`; tutte le dipendenze JavaScript sono compilate nel bundle locale (comportamento descritto anche nella modale Privacy).
 
 ## Verifica
 
-La build controlla TypeScript, le sezioni prerenderizzate, l’esistenza degli
-asset, l’assenza delle vecchie dipendenze CDN e un budget HTML/JavaScript.
-I test controllano lingua, tema, modali, link, CV e il ciclo degli eventi scroll.
-Questi controlli non misurano gli FPS: una verifica su dispositivo reale resta
-necessaria per valutare la fluidità specifica del browser e dell’hardware.
+La suite automatica copre due livelli:
+
+1. **Test (`pnpm test`)** in [`src/test/`](src/test/):
+   - `App.test.tsx` (6 test): accessibilità e gestione focus/scroll del menu mobile, cambio lingua IT/EN e tema chiaro/scuro con persistenza `localStorage`, apertura modali screenshot a piena risoluzione e navigazione di tutte e 4 le slide del gestionale, link ai progetti, link di download dei 2 CV e debounce di `scrollActivity`.
+   - `Effects.test.tsx` (2 test): animazione particelle e pausa/ripresa su `visibilitychange`; blocco e ripristino di Lenis con overlay e ancore.
+   - `Loader.test.tsx` (3 test): chiusura automatica senza dipendere da `sessionStorage`, chiusura con `Escape` e singola esecuzione per sessione, rispetto di `prefers-reduced-motion`.
+2. **Verifica statica post-build (`pnpm build` → [`scripts/verify-build.mjs`](scripts/verify-build.mjs))**:
+   - Assenza di `#intro-overlay` nell’HTML prerenderizzato.
+   - Presenza delle 6 sezioni principali (`profilo`, `competenze`, `esperienza`, `case-study`, `progetti`, `contatti`).
+   - Esistenza di tutti gli asset `/assets/*` referenziati in `dist/index.html` e assenza di immagini inline base64 o vecchi script CDN (`esm.sh`, `tailwindcss/browser`, `api.github`).
+   - Presenza e integrità dei due PDF in `dist/cv/` rispetto a `public/cv/`.
+   - Budget di peso: HTML `< 100 kB` e totale chunk JS `< 160 kB` gzip.
+
+I test girano in ambiente `jsdom` e non misurano gli FPS effettivi: per valutare la fluidità grafica resta necessaria una verifica su browser e dispositivo reale.
 
 ## Pubblicazione
 
-Pubblica la cartella `dist/` su un hosting statico. Per Netlify: comando
-`pnpm build`, directory `dist`. `.openai/hosting.json` conserva l’identità della
-pubblicazione Sites esistente. Nessuna credenziale è inclusa nel progetto.
+`pnpm build` genera l’intero sito statico nella directory `dist/`, compatibile con qualsiasi hosting statico (es. Netlify con build command `pnpm build` e publish directory `dist`, Vercel o Cloudflare Pages). Non sono richieste variabili d’ambiente, database o credenziali lato server; la configurazione Vite usa il base path di default `/`.
 
 ## Galleria del gestionale
 
-Quattro schermate, navigazione tramite frecce, indicatori, tasti direzionali e swipe
-nativo con scroll snap. Nessun autoplay o loop JavaScript. Ogni schermata apre
-la propria immagine a piena risoluzione. La seconda include oscuramenti opachi
-di nomi, comuni e identificativi nella sidebar, incorporati nei pixel sia
-dell’anteprima sia dell’immagine ingrandita. Il nuovo originale non censurato
-non viene copiato nel progetto. La prima schermata è stata sostituita con la nuova panoramica del 9 ottobre,
-con comuni e codici della sidebar oscurati anche nel file ingrandibile.
+La sezione Case Study integra [`CaseStudyGallery.tsx`](src/components/sections/CaseStudyGallery.tsx) con quattro schermate reali del gestionale sviluppato per Algeco Power. La navigazione supporta frecce, indicatori, tasti direzionali (`ArrowLeft`/`ArrowRight`) e swipe nativo con CSS scroll snap, senza autoplay né loop JavaScript. Ogni slide usa un’anteprima WebP compressa nel carosello e apre nella modale la corrispondente immagine WebP a piena risoluzione:
 
-La terza schermata mostra le schede contatti: nomi, indirizzi, comuni, telefoni,
-POD, note e dati degli appuntamenti sono coperti da barre opache sia
-nell’anteprima sia nell’immagine ingrandita. L’originale non censurato non è
-incluso nel progetto.
+1. **Panoramica delle zone e degli appuntamenti** (`algeco`): vista d’insieme della mappa e degli appuntamenti, con comuni e identificativi oscurati nella sidebar.
+2. **Pianificazione degli interventi** (`algecoDetail`): dettaglio operativo sulla mappa, con nominativi, comuni e identificativi oscurati nella sidebar.
+3. **Gestione dei contatti e degli appuntamenti** (`algecoRecords`): schede anagrafiche e appuntamenti con nomi, indirizzi, comuni, telefoni, codici POD, note, date e orari coperti da barre opache.
+4. **Calendario delle attività** (`algecoCalendar`): vista calendario con dati personali, codici POD ed ENELTEL, operatori, account, date, orari e note oscurati.
 
-La quarta schermata mostra il calendario attività con dati personali, POD,
-ENELTEL, operatori, date, orari e note oscurati in entrambe le risoluzioni.
+Tutti gli oscuramenti sono applicati direttamente nei pixel dei file in [`source-assets/`](source-assets/) da cui derivano le versioni in [`src/assets/`](src/assets/); nessun originale non censurato è incluso nel repository.
