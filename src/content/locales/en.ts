@@ -50,6 +50,7 @@ const en = {
     "animazioni": "animations",
     "Automazione": "Automation",
     "CSS modulare": "Modular CSS",
+    "Database locale": "Local database",
     "Excel avanzato (pivot, formule complesse)": "Advanced Excel (pivot tables, complex formulas)"
   },
   "expLabel": "02 / Experience",
@@ -64,9 +65,9 @@ const en = {
   "problem": "Where I started",
   "problemBody": "Data to update in Google Sheets, PDF documents to consult and visits to schedule across the area. I wanted to bring these steps together in a tool that was easier to use.",
   "solution": "What I built",
-  "solutionBody": "A Python and Flask application to manage contacts and appointments, read PDF schedules and display zones and routes on a map. Google Sheets synchronisation works in both directions.",
+  "solutionBody": "A Python and Flask application with a local database to manage contacts and appointments, read PDF schedules and display zones and routes on a map. The local database automatically imports updated Google Sheets files on a schedule and lets users download local changes to import back into Sheets.",
   "architecture": "How it is organised",
-  "architectureAlt": "Flask connects to Google Sheets, Leaflet and OSRM, and WhatsApp messages. A logical integration diagram.",
+  "architectureAlt": "Flask with a local database receives scheduled imports from Google Sheets (with export of local changes), connects to Leaflet and OSRM, and generates WhatsApp messages. A logical integration diagram.",
   "stack": "Stack & deployment",
   "impact": "In day-to-day use",
   "projectsLabel": "04 / Projects",
@@ -128,7 +129,7 @@ const en = {
   "impactPoints": [
     "Appointments and contacts in one tool.",
     "Zones and routes displayed on the map.",
-    "Data also kept up to date in Google Sheets."
+    "Automatic imports from Google Sheets and export of local database changes."
   ],
   "realScreen": "Management system screenshot",
   "imageOpen": "Enlarge screenshot",

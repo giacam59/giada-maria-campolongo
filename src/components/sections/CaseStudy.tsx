@@ -6,7 +6,7 @@ import { Tags } from '../ui/Tags';
 import { CaseStudyGallery } from './CaseStudyGallery';
 import { ArchitectureDiagram } from './ArchitectureDiagram';
 
-const stack = ['Python', 'Flask', 'Google Sheets', 'pdfplumber', 'Jinja2', 'Leaflet', 'DBSCAN', 'OSRM', 'Docker', 'VPS Ubuntu', 'Cloudflare Tunnel'];
+const stack = ['Python', 'Flask', 'Database locale', 'Google Sheets', 'pdfplumber', 'Jinja2', 'Leaflet', 'DBSCAN', 'OSRM', 'Docker', 'VPS Ubuntu', 'Cloudflare Tunnel'];
 
 export function CaseStudy({ onImage }: { onImage: (key: MediaKey) => void }) {
   const { copy } = usePreferences();

@@ -50,6 +50,7 @@ const it = {
     "animazioni": "animazioni",
     "Automazione": "Automazione",
     "CSS modulare": "CSS modulare",
+    "Database locale": "Database locale",
     "Excel avanzato (pivot, formule complesse)": "Excel avanzato (pivot, formule complesse)"
   },
   "expLabel": "02 / Esperienze",
@@ -64,9 +65,9 @@ const it = {
   "problem": "Da cosa sono partita",
   "problemBody": "Dati da aggiornare su Google Sheets, documenti PDF da consultare e interventi da distribuire sul territorio. Volevo riunire questi passaggi in uno strumento più facile da usare.",
   "solution": "Cosa ho sviluppato",
-  "solutionBody": "Un’applicazione in Python e Flask per gestire contatti e appuntamenti, leggere le distinte PDF e visualizzare zone e percorsi sulla mappa. La sincronizzazione con Google Sheets funziona in entrambe le direzioni.",
+  "solutionBody": "Un’applicazione in Python e Flask con database locale per gestire contatti e appuntamenti, leggere le distinte PDF e visualizzare zone e percorsi sulla mappa. Il database importa in automatico a intervalli regolari il file aggiornato da Google Sheets e consente di scaricare le modifiche effettuate in locale per reimportarle su Sheets.",
   "architecture": "Come è organizzato",
-  "architectureAlt": "Flask comunica con Google Sheets, Leaflet e OSRM, e messaggi WhatsApp. Diagramma logico delle integrazioni.",
+  "architectureAlt": "Flask con database locale riceve importazioni automatiche da Google Sheets (con export delle modifiche locali), comunica con Leaflet e OSRM e genera messaggi WhatsApp. Diagramma logico delle integrazioni.",
   "stack": "Stack & deploy",
   "impact": "Nel lavoro quotidiano",
   "projectsLabel": "04 / Progetti",
@@ -128,7 +129,7 @@ const it = {
   "impactPoints": [
     "Appuntamenti e contatti nello stesso strumento.",
     "Zone e percorsi consultabili sulla mappa.",
-    "Dati aggiornati anche su Google Sheets."
+    "Import automatico da Google Sheets ed export delle modifiche dal database locale."
   ],
   "realScreen": "Schermata del gestionale",
   "imageOpen": "Ingrandisci la schermata",
