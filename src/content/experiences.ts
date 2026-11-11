@@ -14,13 +14,13 @@ export const experiences: Experience[] = [
       "en": "Volpiano (TO)"
     },
     "date": {
-      "it": "Nov 2025 - In corso",
-      "en": "Nov 2025 - Present"
+      "it": "Nov 2025 - Nov 2026",
+      "en": "Nov 2025 - Nov 2026"
     },
-    "current": true,
+    "current": false,
     "description": {
-      "it": "Mi occupo di appuntamenti, documenti, contatti e supporto operativo con Excel e CRM E-Distribuzione. Ho progettato e sviluppato un gestionale in Python e Flask per pianificare gli interventi tecnici: integra Google Sheets, legge i PDF con pdfplumber e visualizza zone e percorsi con Jinja2, Leaflet, DBSCAN e OSRM in Docker. Ho seguito anche la pubblicazione su VPS Ubuntu tramite Cloudflare Tunnel, l’autenticazione utenti, i backup automatici e la generazione di messaggi WhatsApp.",
-      "en": "I handle appointments, documents, contacts and operational support using Excel and the E-Distribuzione CRM. I designed and developed a Python and Flask management system for scheduling technical visits: it integrates Google Sheets, reads PDFs with pdfplumber and displays areas and routes using Jinja2, Leaflet, DBSCAN and OSRM in Docker. I also handled deployment on an Ubuntu VPS through Cloudflare Tunnel, user authentication, automatic backups and WhatsApp message generation."
+      "it": "Ho gestito appuntamenti, documenti, contatti e supporto operativo con Excel e CRM E-Distribuzione. Ho progettato e sviluppato un gestionale in Python e Flask per pianificare gli interventi tecnici: integra Google Sheets, legge i PDF con pdfplumber e visualizza zone e percorsi con Jinja2, Leaflet, DBSCAN e OSRM in Docker. Ho seguito anche la pubblicazione su VPS Ubuntu tramite Cloudflare Tunnel, l’autenticazione utenti, i backup automatici e la generazione di messaggi WhatsApp.",
+      "en": "I handled appointments, documents, contacts and operational support using Excel and the E-Distribuzione CRM. I designed and developed a Python and Flask management system for scheduling technical visits: it integrates Google Sheets, reads PDFs with pdfplumber and displays areas and routes using Jinja2, Leaflet, DBSCAN and OSRM in Docker. I also handled deployment on an Ubuntu VPS through Cloudflare Tunnel, user authentication, automatic backups and WhatsApp message generation."
     },
     "tags": [
       "Python / Flask",

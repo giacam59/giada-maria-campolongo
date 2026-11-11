@@ -60,7 +60,7 @@ const en = {
   "caseLabel": "03 / Internal management system",
   "caseTitle": "The management system\nfor Algeco Power",
   "caseIntro": "Organising technical visits",
-  "caseDescription": "I built it around the tasks I handle at work: appointments, documents, contacts and technician coordination.",
+  "caseDescription": "I built it around the tasks I handled at work: appointments, documents, contacts and technician coordination.",
   "problem": "Where I started",
   "problemBody": "Data to update in Google Sheets, PDF documents to consult and visits to schedule across the area. I wanted to bring these steps together in a tool that was easier to use.",
   "solution": "What I built",
@@ -110,7 +110,7 @@ const en = {
   "motionOff": "Reduced motion",
   "notFound": "Content unavailable.",
   "role": "Junior Full-Stack Developer · Administrative and Commercial Back-Office",
-  "profile": "I work in back-office administration and develop tools to simplify office tasks. At Algeco Power I built a Python and Flask management system, now used to organise technical visits. I taught myself to code and also build websites and web applications with React and TypeScript. My day-to-day work involves data, documents and contacts, with attention to accuracy and organisation.",
+  "profile": "I work in back-office administration and develop tools to simplify office tasks. At Algeco Power I built a Python and Flask management system to organise technical visits. I taught myself to code and also build websites and web applications with React and TypeScript. My day-to-day work involves data, documents and contacts, with attention to accuracy and organisation.",
   "profileRows": [
     [
       "Code",
@@ -133,7 +133,7 @@ const en = {
   "realScreen": "Management system screenshot",
   "imageOpen": "Enlarge screenshot",
   "imageHint": "Select the image to enlarge it",
-  "imageCaption": "Screenshot of the application in use.",
+  "imageCaption": "Application screenshot.",
   "visitSite": "Visit website"
 };
 

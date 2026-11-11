@@ -60,7 +60,7 @@ const it = {
   "caseLabel": "03 / Gestionale aziendale",
   "caseTitle": "Il gestionale per\nAlgeco Power",
   "caseIntro": "Organizzare gli interventi tecnici",
-  "caseDescription": "L’ho sviluppato partendo dalle attività che seguo in ufficio: appuntamenti, documenti, contatti e coordinamento dei tecnici.",
+  "caseDescription": "L’ho sviluppato partendo dalle attività che seguivo in ufficio: appuntamenti, documenti, contatti e coordinamento dei tecnici.",
   "problem": "Da cosa sono partita",
   "problemBody": "Dati da aggiornare su Google Sheets, documenti PDF da consultare e interventi da distribuire sul territorio. Volevo riunire questi passaggi in uno strumento più facile da usare.",
   "solution": "Cosa ho sviluppato",
@@ -110,7 +110,7 @@ const it = {
   "motionOff": "Animazioni ridotte",
   "notFound": "Contenuto non disponibile.",
   "role": "Sviluppatrice Full-Stack Junior · Back-office amministrativo e commerciale",
-  "profile": "Mi occupo di back-office e sviluppo strumenti per semplificare le attività d’ufficio. In Algeco Power ho realizzato un gestionale in Python e Flask, oggi utilizzato per organizzare gli interventi tecnici. Ho imparato a programmare da autodidatta e realizzo anche siti e applicazioni web con React e TypeScript. Nel lavoro quotidiano seguo dati, documenti e contatti, con attenzione alla precisione e all’organizzazione.",
+  "profile": "Mi occupo di back-office e sviluppo strumenti per semplificare le attività d’ufficio. In Algeco Power ho realizzato un gestionale in Python e Flask per organizzare gli interventi tecnici. Ho imparato a programmare da autodidatta e realizzo anche siti e applicazioni web con React e TypeScript. Nel lavoro quotidiano seguo dati, documenti e contatti, con attenzione alla precisione e all’organizzazione.",
   "profileRows": [
     [
       "Codice",
@@ -133,7 +133,7 @@ const it = {
   "realScreen": "Schermata del gestionale",
   "imageOpen": "Ingrandisci la schermata",
   "imageHint": "Seleziona l’immagine per ingrandirla",
-  "imageCaption": "Schermata dell’applicazione in uso.",
+  "imageCaption": "Schermata dell’applicazione.",
   "visitSite": "Apri il sito"
 };
 
